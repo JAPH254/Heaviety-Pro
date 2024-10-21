@@ -4,7 +4,8 @@ from django.core.validators import validate_email
 from django.utils.translation import gettext_lazy as _
 
 class UserManager(BaseUserManager):
-    def email_validator(self, email):
+    @staticmethod
+    def email_validator(email):
         try:
             validate_email(email)
         except ValidationError:
@@ -16,11 +17,13 @@ class UserManager(BaseUserManager):
             return normalized_email
         else:
             raise ValidationError(_('Email address is required'))
-    def validate_password(self, password):
+    @staticmethod
+    def validate_password(password):
         if not password:
             raise ValidationError(_('Password is required'))
         return password
-    def compare_passwords(self, password1, password2):
+    @staticmethod
+    def compare_passwords(password1, password2):
         if password1 != password2:
             raise ValidationError(_('Passwords do not match'))
         
