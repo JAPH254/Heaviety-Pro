@@ -1,10 +1,9 @@
 
-// Register.jsx
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import InputField from "./InputField"; // Ensure this component is correctly implemented
-import FormHeader from "./FormHeader"; // Ensure this component is correctly implemented
-import FormButton from "./FormButton"; // Ensure this component is correctly implemented
+import InputField from "./inputfield"; 
+import FormHeader from "./formHeader"; 
+import FormButton from "./formButton"; 
 
 const Register = () => {
   const { register, handleSubmit, reset } = useForm();
@@ -12,9 +11,28 @@ const Register = () => {
 
   const onSubmit = async (data) => {
     try {
-      console.log("Registration successful:", data);
-      // Here you would typically call an API to register the user
-      reset();
+      console.log("Registration data:", data);
+      
+      
+      const REGISTER_URL = "YOUR_API_ENDPOINT_HERE"; 
+
+      // Use fetch to send the registration data
+      const response = await fetch(REGISTER_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const result = await response.json();
+      console.log("Registration successful:", result);
+      
+      reset(); // Reset the form
       navigate("/login"); // Navigate to login page
     } catch (error) {
       console.error("Registration failed", error);
