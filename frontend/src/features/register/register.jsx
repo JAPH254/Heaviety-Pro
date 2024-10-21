@@ -1,4 +1,3 @@
-
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import InputField from "./inputfield"; 
@@ -9,10 +8,26 @@ const Register = () => {
   const { register, handleSubmit, reset } = useForm();
   const navigate = useNavigate();
 
+  // Function to sanitize user input
+  const sanitizeInput = (input) => {
+    if (typeof input === 'string') {
+      return input.replace(/[\n\r]/g, ''); // Basic sanitization
+    }
+    // If the input is an object, sanitize all string properties
+    if (typeof input === 'object' && input !== null) {
+      return Object.keys(input).reduce((acc, key) => {
+        acc[key] = sanitizeInput(input[key]);
+        return acc;
+      }, {});
+    }
+    return input; // Return input as is if it doesn't match above criteria
+  };
+
   const onSubmit = async (data) => {
     try {
-      console.log("Registration data:", data);
-      
+      // Sanitize registration data before logging
+      const sanitizedData = sanitizeInput(data);
+      console.log("Registration data:", sanitizedData);
       
       const REGISTER_URL = "YOUR_API_ENDPOINT_HERE"; 
 
@@ -30,7 +45,9 @@ const Register = () => {
       }
 
       const result = await response.json();
-      console.log("Registration successful:", result);
+      // Sanitize result before logging
+      const sanitizedResult = sanitizeInput(result);
+      console.log("Registration successful:", sanitizedResult);
       
       reset(); // Reset the form
       navigate("/login"); // Navigate to login page
