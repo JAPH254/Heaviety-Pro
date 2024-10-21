@@ -1,4 +1,4 @@
-// InputField.jsx
+
 const InputField = ({ id, label, type = "text", register, required }) => {
     return (
       <div>
