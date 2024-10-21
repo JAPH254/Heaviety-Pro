@@ -1,6 +1,9 @@
-import React from 'react';
+
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'; 
 import Home from './pages/Home'; 
+import InputField from './features/register/inputfield.jsx';
+import FormHeader from './features/register/formHeader.jsx';
+import FormButton from  './features/register/formButton.jsx'
 import Register from './features/register/register.jsx';
 
 function App() {
@@ -9,6 +12,7 @@ function App() {
       path: '/',
       element: <Home />,
     },
+    
     {
       path: "/register",
       element: <Register />,
@@ -16,9 +20,9 @@ function App() {
   ]);
 
   return (
-    <>
+    
       <RouterProvider router={router} />
-    </>
+    
   );
 }
 
