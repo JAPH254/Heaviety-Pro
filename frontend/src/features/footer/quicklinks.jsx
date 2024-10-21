@@ -1,4 +1,4 @@
-// QuickLinks.jsx
+
 const QuickLinks = () => (
     <div>
       <h3 className="text-lg font-semibold">Quick Links</h3>
