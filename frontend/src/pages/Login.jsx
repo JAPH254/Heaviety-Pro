@@ -1,4 +1,3 @@
-import React  from "react";
 import { useForm } from "react-hook-form";
 import './Login.scss';
 import axios from "axios";
@@ -9,7 +8,7 @@ const Login = () => {
 
 const onSubmit = async (data) => {
     try {
-        const response = await axios.post('http://localhost:8080/api/login', {
+        await axios.post('http://localhost:8080/api/login', {
             email: data.email,
             password: data.password,
         });
@@ -34,8 +33,9 @@ return(
              {...register('password', {required: true, minLength: 8})} />
              {errors.password && <span className="error-message">Password must be at least 8 characters long</span>}
              <button type="submit">Login</button>
-             <p>Don't have an account? <a href="#">Sign up</a></p>  
-             <p>Forgot your password? <a href="#">Reset password</a></p> 
+             <p>Don&apos;t have an account? <a href="/signup">Sign up</a></p>
+             <p>Forgot your password? <a href="/reset-password">Reset password</a></p>
+ 
         </form>
             
     </div>
