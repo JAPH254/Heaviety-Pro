@@ -7,6 +7,7 @@
   max-width: 400px;
   transition: box-shadow 0.3s ease;
   text-align: center;
+  position: relative;
 
   &:hover {
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
@@ -15,28 +16,32 @@
   h1 {
     font-size: 28px;
     margin-bottom: 30px;
+    text-align: left;
+    width: 100%;
     color: #333;
     font-weight: 600;
+    margin: 0 auto 30px auto;
   }
 
-  /* Center and balance inputs and buttons */
+  /* Adjust input and button to be the same length */
   input, button {
-    display: block; /* Ensures that they take up the full width and are aligned properly */
-    margin: 15px auto; /* Centers the elements horizontally */
-    width: 90%; /* Reduced width for equal margins on both sides */
-    padding: 15px; /* More padding for a balanced, pleasant look */
+    display: block; 
+    margin: 15px auto; 
+    width: 100%; 
+    padding: 15px; 
     border-radius: 8px;
     font-size: 16px;
-    transition: all 0.3s ease; /* Smooth transitions */
+    transition: all 0.3s ease;
+    box-sizing: border-box;
   }
 
   /* Styling specifically for inputs */
   input {
-    border: 1px solid #d1d9e6;
-    background-color: #f9f9f9;
+    border: 1px solid black;
+    background-color: white;
 
     &:focus {
-      border-color: #4285f4;
+      border-color: white;
       outline: none;
     }
   }
@@ -44,7 +49,7 @@
   /* Styling specifically for buttons */
   button {
     background-color: #4285f4;
-    color: white;
+    color: white; 
     border: none;
     font-size: 18px;
     font-weight: 600;
@@ -54,6 +59,7 @@
     &:hover {
       background-color: #357ae8;
     }
+    
   }
 
   .error-message {
@@ -61,6 +67,8 @@
     font-size: 14px;
     margin-bottom: 10px;
     text-align: left;
+    width: 100%;
+
   }
 
   p {
@@ -69,7 +77,7 @@
     color: #0f0a0a;
 
     a {
-      color: #4285f4;
+      color: #463ccd;
       text-decoration: none;
       font-weight: 500;
       transition: color 0.3s ease;

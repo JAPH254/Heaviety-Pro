@@ -1,44 +1,65 @@
+// src/components/Login.jsx
 import { useForm } from "react-hook-form";
+// import { useNavigate } from 'react-router-dom'; 
 import './Login.scss';
-import axios from "axios";
+import { useDispatch, useSelector } from 'react-redux';
+import { login } from '../pages/loginSlice'; // Adjust the path if necessary
+import { useEffect } from 'react';
 
 const Login = () => {
-    const { register, handleSubmit, formState:{errors}} = useForm();
+    const { register, handleSubmit, formState: { errors } } = useForm();
+    const dispatch = useDispatch();
+    // const navigate = useNavigate();
+    const { loading, error } = useSelector((state) => state.auth);
 
+    const onSubmit = async (data) => {
+        // Dispatch login action with email and password
+        dispatch(login({ email: data.email, password: data.password }));
+    };
 
-const onSubmit = async (data) => {
-    try {
-        await axios.post('http://localhost:8080/api/login', {
-            email: data.email,
-            password: data.password,
-        });
-        console.log('You have logged in successfully');
-    } catch (error) {
-        console.error('Login failed',error);
-    }
-}
+    useEffect(() => {
+        if (error) {
+            console.error('Login failed', error);
+        }
+    }, [error]);
+    // useEffect(() => {
+    //     if (isAuthenticated) {
+    //         navigate('/dashboard');
+    //     }
+    // }, [isAuthenticated, navigate]);
 
-return(
-    <div className="login-container">
-        <form className="login-form" onSubmit={handleSubmit(onSubmit)}>
-            <h1>Login</h1>
-            <input
-             type="email" 
-             placeholder="Email" 
-             {...register('email', {required: true, pattern: /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/})} />
-            {errors.email && <span className="error-message">Please enter a valid email address</span>}
-            <input
-             type="password" 
-             placeholder="Password" 
-             {...register('password', {required: true, minLength: 8})} />
-             {errors.password && <span className="error-message">Password must be at least 8 characters long</span>}
-             <button type="submit">Login</button>
-             <p>Don&apos;t have an account? <a href="/signup">Sign up</a></p>
-             <p>Forgot your password? <a href="/reset-password">Reset password</a></p>
- 
-        </form>
-            
-    </div>
-)
+    return (
+        <div className="login-container">
+            <form className="login-form" onSubmit={handleSubmit(onSubmit)}>
+                <h1>Login</h1>
+                <input
+                    type="email"
+                    placeholder="Email"
+                    {...register('email', {
+                        required: true,
+                        pattern: /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/ // Regex for email validation
+                    })}
+                />
+                {errors.email && <span className="error-message">Please enter a valid email address</span>}
+
+                <input
+                    type="password"
+                    placeholder="Password"
+                    {...register('password', { required: true, minLength: 8 })}
+                />
+                {errors.password && <span className="error-message">Password must be at least 8 characters long</span>}
+
+                <button type="submit" disabled={loading}>
+                    {loading ? 'Logging in...' : 'Login'}
+                </button>
+
+                {error && <span className="error-message">{error}</span>}
+
+                <p>Don&apos;t have an account? <a href="/signup">Sign up</a></p>
+                
+            </form>
+        </div>
+    );
 };
+
 export default Login;
