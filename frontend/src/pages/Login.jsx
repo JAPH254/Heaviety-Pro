@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 // import { useNavigate } from 'react-router-dom'; 
 import './Login.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import { login } from '../pages/loginSlice'; // Adjust the path if necessary
+import { login } from './loginSlice'; // Adjust the path if necessary
 import { useEffect } from 'react';
 
 const Login = () => {
@@ -12,7 +12,7 @@ const Login = () => {
     // const navigate = useNavigate();
     const { loading, error } = useSelector((state) => state.auth);
 
-    const onSubmit = async (data) => {
+    const onSubmit = (data) => {
         // Dispatch login action with email and password
         dispatch(login({ email: data.email, password: data.password }));
     };
