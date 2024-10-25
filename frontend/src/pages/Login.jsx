@@ -55,7 +55,7 @@ const Login = () => {
 
                 {error && <span className="error-message">{error}</span>}
 
-                <p>Don&apos;t have an account? <a href="/signup">Sign up</a></p>
+                
                 
             </form>
         </div>
