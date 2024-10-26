@@ -1,9 +1,8 @@
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
 from djoser.serializers import UserCreateSerializer as BaseUserCreateSerializer, UserSerializer as BaseUserSerializer
-from .models import User
 
-# User = get_user_model()
+User = get_user_model()
 
 class UserCreateSerializer(BaseUserCreateSerializer):
     id = serializers.IntegerField(read_only=True)
