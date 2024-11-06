@@ -16,15 +16,14 @@ function App() {
       path: "/register",
       element: <Register />,
     },
-    {
-      path: "/login",
-      element: <Login />,
-    }
   ]);
 
- 
+  console.log('App is rendering');
   return (
 
+     <Login/>
+    
+  )
       <RouterProvider router={router} />
     
   );

@@ -2,8 +2,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import InputField from "./inputfield"; 
 import FormHeader from "./formHeader"; 
-import FormButton from "./formButton";
-import { registerUser } from "./registerApi"; // Import registerUser function
+import FormButton from "./formButton"; 
 
 const Register = () => {
   const { register, handleSubmit, reset } = useForm();
@@ -30,8 +29,25 @@ const Register = () => {
       const sanitizedData = sanitizeInput(data);
       console.log("Registration data:", sanitizedData);
       
-      const result = await registerUser(sanitizedData); // Use registerUser function
-      console.log("Registration successful:", sanitizeInput(result));
+      const REGISTER_URL = "YOUR_API_ENDPOINT_HERE"; 
+
+      // Use fetch to send the registration data
+      const response = await fetch(REGISTER_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const result = await response.json();
+      // Sanitize result before logging
+      const sanitizedResult = sanitizeInput(result);
+      console.log("Registration successful:", sanitizedResult);
       
       reset(); // Reset the form
       navigate("/login"); // Navigate to login page
