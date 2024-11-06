@@ -3,18 +3,22 @@ import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { setupListeners } from "@reduxjs/toolkit/query";
 
-import { registerApi } from "../features/register/registerApi"; // Ensure the correct import
+import { registerUser } from "../features/register/registerApi"
+import authReducer from "../pages/loginSlice"
+ // Ensure the correct import
 
 // Persist configuration
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["registerApi"], // Corrected to use an array
+  whitelist: [registerUser.reducerPath], // This should match exactly the reducer path name
 };
 
 // Combine reducers
 const rootReducer = combineReducers({
-  [registerApi.reducerPath]: registerApi.reducer,
+  
+  auth: authReducer,
+  [registerUser.reducerPath]: registerUser.reducer,
 });
 
 // Create persisted reducer
@@ -28,11 +32,11 @@ export const store = configureStore({
       serializableCheck: {
         ignoredActions: ["persist/PERSIST"],
       },
-    }).concat(registerApi.middleware),
+    }).concat(registerUser.middleware),
 });
 
 // Create persistor
-export const persistor = persistStore(store);
+export const persistedStore = persistStore(store);
 
 // Set up listeners for RTK Query
 setupListeners(store.dispatch);
