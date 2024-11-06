@@ -4,7 +4,7 @@ import App from './App.jsx';
 import './index.css';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
-import { store, persistedStore } from './app/Store.js';
+import { store ,persistedStore} from './app/store.js';
 
 createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -15,3 +15,6 @@ createRoot(document.getElementById('root')).render(
     </Provider>
   </React.StrictMode>,
 );
+console.log('Rendering App component');
+console.log('Store:', store);
+console.log('Persisted Store:', persistedStore);
