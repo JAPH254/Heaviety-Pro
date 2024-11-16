@@ -16,26 +16,26 @@ export const  login = createAsyncThunk('auth/login', async(credentials,{rejectWi
 
 const authSlice = createSlice({
     name: 'auth',
-    initialState:{
-        user: null,
+    initialState: {
+        loading: false,
         error: null,
-        isLoading: false
+        user: null, // This will store user data or token
     },
-    reducers:{},
-    extraReducers:(builder)=>{
+    reducers: {},
+    extraReducers: (builder) => {
         builder
-        .addCase(login.pending, (state,action) => {
-            state.isLoading = true;
-            state.error = null;
-        })
-        .addCase(login.fulfilled, (state,action) => {
-            state.isLoading = false;
-            state.user = action.payload;
-        })
-        .addCase(login.rejected, (state,action) => {
-            state.isLoading = false;
-            state.error = action.payload;
-        })
+            .addCase(login.pending, (state) => {
+                state.loading = true;
+                state.error = null; // Reset error on new request
+            })
+            .addCase(login.fulfilled, (state, action) => {
+                state.loading = false;
+                state.user = action.payload; // Store the user data or token on successful login
+            })
+            .addCase(login.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload || 'Login failed'; // Handle error on login failure
+            });
     },
 });
 

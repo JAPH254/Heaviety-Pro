@@ -11,7 +11,7 @@ const persistConfig ={
     whitelist:[],
 };
 const rootReducer = combineReducers({
-    auth:authReducer,
+    auth:authReducer
     
 });
 const persistedReducer  = persistReducer(persistConfig,rootReducer);
