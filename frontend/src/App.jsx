@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'; 
 import Home from './pages/home.jsx'; 
 import Register from './features/register/register.jsx';
-import ActivateAccount from './Pages/ActivateAccount';
+import ActivateAccount from './pages/ActivateAccount.jsx';
 import Login from './pages/Login.jsx';
 import './App.css';
 
