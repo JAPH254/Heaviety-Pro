@@ -30,7 +30,7 @@ function FormWrapper({ children }) {
 
 // Form handles the form submission logic.
 function Form({ children }) {
-  const { register, handleSubmit, reset, formState: { errors } } = useForm();
+  const { register, handleSubmit, reset, formState: {} } = useForm();
   const [registerUser, { isLoading }] = useRegisterUserMutation();
   const navigate = useNavigate();
 
@@ -60,7 +60,7 @@ function Form({ children }) {
 
 // FormEntry renders the individual input field with its label.
 function FormEntry({ labelName, inputType }) {
-  const { register, formState: { errors } } = useForm();
+  const {formState: { errors } } = useForm();
 
   return (
     <div>
