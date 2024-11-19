@@ -1,11 +1,8 @@
-import { Link, useNavigate } from 'react-router-dom';  
-import { useForm } from 'react-hook-form';
-import registerApi from './registerApi';
-
+import { useRegisterUserMutation } from './registerApi'; 
 
 const Register = () => {
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
-  const [registerUser, { isLoading, }] = registerApi.useRegisterUserMutation();
+  const [registerUser, { isLoading, error }] = useRegisterUserMutation(); // Access directly
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
@@ -13,8 +10,8 @@ const Register = () => {
       await registerUser(data).unwrap();
       reset();
       navigate('/login');
-    } catch (error) {
-      console.error('Registration failed', error);
+    } catch (err) { // Renamed to avoid shadowing
+      console.error('Registration failed', err);
     }
   };
 
@@ -78,7 +75,5 @@ const Register = () => {
     </div>
   );
 };
-
-
 
 export default Register;
