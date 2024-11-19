@@ -7,7 +7,7 @@ function Navbar() {
         HEAVIETY
       </div>
  
-      <button className="text-white text-2xl btn btn-ghost">
+      <button className="text-white text-2xl btn btn-ghost aria-label=Toggle navigation menu">
         &#9776;
       </button> 
     </nav>
