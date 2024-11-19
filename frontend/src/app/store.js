@@ -1,38 +1,30 @@
-import { configureStore, combineReducers } from "@reduxjs/toolkit";
-import { persistStore, persistReducer } from "redux-persist";
-import storage from "redux-persist/lib/storage";
-import { setupListeners } from "@reduxjs/toolkit/query";
+// src/app/store.js
+import { configureStore } from '@reduxjs/toolkit';
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage'; // Using default localStorage for web
+import loginReducer from '../pages/loginSlice.js';
 
-import { registerApi } from "../features/register/registerApi"; // Ensure the correct import
-
-// Persist configuration
+// Define persist configuration
 const persistConfig = {
-  key: "root",
-  storage,
-  whitelist: ["registerApi"], // Corrected to use an array
+    key: 'auth',
+    storage, // This uses localStorage to persist the state
 };
 
-// Combine reducers
-const rootReducer = combineReducers({
-  [registerApi.reducerPath]: registerApi.reducer,
+// Persist the loginReducer (auth state)
+const persistedLoginReducer = persistReducer(persistConfig, loginReducer);
+
+const store = configureStore({
+    reducer: {
+        auth: persistedLoginReducer, // Use persisted reducer for authentication
+    },
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware({
+            serializableCheck: {
+                ignoredActions: ['persist/PERSIST', 'persist/REHYDRATE'],
+            },
+        }),
 });
 
-// Create persisted reducer
-const persistedReducer = persistReducer(persistConfig, rootReducer);
+const persistedStore = persistStore(store);
 
-// Configure store
-export const store = configureStore({
-  reducer: persistedReducer,
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      serializableCheck: {
-        ignoredActions: ["persist/PERSIST"],
-      },
-    }).concat(registerApi.middleware),
-});
-
-// Create persistor
-export const persistor = persistStore(store);
-
-// Set up listeners for RTK Query
-setupListeners(store.dispatch);
+export { store, persistedStore };
