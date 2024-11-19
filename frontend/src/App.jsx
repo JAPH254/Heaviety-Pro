@@ -1,17 +1,28 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom'; // Import BrowserRouter
-import Navbar from './pages/navbar';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import Home from './pages/home';
 import Register from './pages/register';
-import Footer from './pages/footer';
+import ErrorBoundary from './pages/errorBoundary';
+
+import './App.css';
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Home />,
+  },
+  {
+    path: "/register",
+    element: <Register />,
+  },
+  {
+    path:"/ErrorBoundary",
+    element: <ErrorBoundary />,
+  }
+]);
 
 function App() {
-  return (
-    <BrowserRouter> 
-      <Navbar />
-      <Register />
-      <Footer />
-    </BrowserRouter>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;
