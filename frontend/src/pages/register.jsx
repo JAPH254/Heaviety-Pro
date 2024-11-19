@@ -1,8 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';  
+import { Link, useNavigate } from 'react-router-dom';  
 import { useForm } from 'react-hook-form';
 import registerApi from './registerApi';
-import { useNavigate } from 'react-router-dom';
 import ErrorBoundary from './errorBoundary';
 
 const Register = () => {
