@@ -1,12 +1,11 @@
-import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';  
 import { useForm } from 'react-hook-form';
 import registerApi from './registerApi';
-import ErrorBoundary from './errorBoundary';
+
 
 const Register = () => {
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
-  const [registerUser, { isLoading, error }] = registerApi.useRegisterUserMutation();
+  const [registerUser, { isLoading, }] = registerApi.useRegisterUserMutation();
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
@@ -81,10 +80,5 @@ const Register = () => {
 };
 
 
-const WrappedRegister = () => (
-  <ErrorBoundary>
-    <Register />
-  </ErrorBoundary>
-);
 
 export default Register;
