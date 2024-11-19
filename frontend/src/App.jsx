@@ -1,21 +1,39 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+
 import ActivateAccount from '/src/Pages/ActivateAccount'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'; 
+import Home from './pages/home.jsx'; 
 
-
+import Register from './features/register/register.jsx';
+import './App.css'
+import Login from './pages/Login.jsx'
 function App() {
-  const [count, setCount] = useState(0)
+  const router = createBrowserRouter([
+    {
+      path: '/',
+      element: <Home />,
+    },
+    
+    {
+      path: "/register",
+      element: <Register />,
+    },
+    {
+      path: '/',
+      element:<ActivateAccount/>,
+    },
+  ]);
 
+  console.log('App is rendering');
   return (
-    <Router>
-      <Routes>
-        <Route path="/activate" element={<ActivateAccount />} />
-      </Routes>
-    </Router>
+
+
+     <Login/>
+    
+
   )
+      <RouterProvider router={router} />
+    
+  );
 }
 
-export default App
+export default App;
