@@ -1,31 +1,29 @@
-
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'; 
 import Home from './pages/home.jsx'; 
-
 import Register from './features/register/register.jsx';
-import './App.css'
-import Login from './pages/Login.jsx'
+import ActivateAccount from './Pages/ActivateAccount';
+import Login from './pages/Login.jsx';
+import './App.css';
+
 function App() {
   const router = createBrowserRouter([
     {
       path: '/',
       element: <Home />,
     },
-    
     {
-      path: "/register",
+      path: '/register',
       element: <Register />,
+    },
+    {
+      path: '/activate-account',
+      element: <ActivateAccount />,
     },
   ]);
 
   console.log('App is rendering');
   return (
-
-     <Login/>
-    
-  )
-      <RouterProvider router={router} />
-    
+    <RouterProvider router={router} />
   );
 }
 
