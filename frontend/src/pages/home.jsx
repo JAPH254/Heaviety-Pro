@@ -1,16 +1,16 @@
 
-import Navbar from "../components/navbar.jsx";
-import Footer from "../features/footer/footer.jsx"
-import WelcomeSection from "../components/welcomeSection.jsx";
+import Navbar from './navbar';
+import LandingPage from './landingPage';
+import Footer from './footer';
 
-function Home () {
-    return(
-        <>
-        <Navbar />
-        <WelcomeSection />
-        <Footer />
-        </>
-    );
-};
+function Home() {
+  return (
+    <> 
+      <Navbar />
+      <LandingPage />
+      <Footer />
+    </>
+  );
+}
 
 export default Home;

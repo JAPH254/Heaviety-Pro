@@ -26,5 +26,8 @@ const store = configureStore({
 });
 
 const persistedStore = persistStore(store);
-
 export { store, persistedStore };
+
+// Set up listeners for RTK Query
+setupListeners(store.dispatch);
+
