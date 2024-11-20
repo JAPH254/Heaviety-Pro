@@ -1,6 +1,6 @@
 // src/components/Login.jsx
 import { useForm } from "react-hook-form";
-// import { useNavigate } from 'react-router-dom'; 
+import { useNavigate } from 'react-router-dom'; 
 import './Login.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from './loginSlice'; // Adjust the path if necessary
@@ -9,8 +9,8 @@ import { useEffect } from 'react';
 const Login = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const dispatch = useDispatch();
-    // const navigate = useNavigate();
-    const { loading, error } = useSelector((state) => state.auth);
+    const navigate = useNavigate();
+    const { loading, error, isAuthenticated } = useSelector((state) => state.auth);
 
     const onSubmit = (data) => {
         // Dispatch login action with email and password
@@ -22,11 +22,11 @@ const Login = () => {
             console.error('Login failed', error);
         }
     }, [error]);
-    // useEffect(() => {
-    //     if (isAuthenticated) {
-    //         navigate('/dashboard');
-    //     }
-    // }, [isAuthenticated, navigate]);
+    useEffect(() => {
+        if (isAuthenticated) {
+            navigate('/dashboard');
+        }
+    }, [isAuthenticated, navigate]);
 
     return (
         <div className="login-container">
