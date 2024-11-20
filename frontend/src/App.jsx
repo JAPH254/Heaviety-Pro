@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'; 
 import Home from './pages/home.jsx'; 
 import Register from './features/register/register.jsx';
-import ActivateAccount from './pages/ActivateAccount.jsx';
+import Error from './pages/Error.jsx';
 import Login from './pages/Login.jsx';
 import './App.css';
 
@@ -10,14 +10,17 @@ function App() {
     {
       path: '/',
       element: <Home />,
+      errorElement: <Error />,
     },
     {
       path: '/register',
       element: <Register />,
+      errorElement: <Error />,
     },
     {
-      path: '/activate-account',
-      element: <ActivateAccount />,
+      path: '/login',
+      element: <Login />,
+      errorElement: <Error />,
     },
   ]);
 
