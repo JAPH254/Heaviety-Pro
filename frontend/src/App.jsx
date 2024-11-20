@@ -23,8 +23,8 @@ function App() {
     {
       path: '/activateaccout',
       element: <ActivateAccount/>,
-    }
-      {
+    },
+    {
     path:"/ErrorBoundary",
     element: <ErrorBoundary />,
   }
