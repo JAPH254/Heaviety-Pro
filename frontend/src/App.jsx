@@ -1,4 +1,3 @@
-
 import Home from './pages/home';
 import Register from './pages/register';
 import ErrorBoundary from './pages/errorBoundary';
@@ -18,9 +17,13 @@ function App() {
       element: <Register />,
     },
     {
-      path: '/activate-account',
-      element: <ActivateAccount />,
+      path: '/login',
+      element: <Login />,
     },
+    {
+      path: '/activateaccout',
+      element: <ActivateAccount/>,
+    }
       {
     path:"/ErrorBoundary",
     element: <ErrorBoundary />,

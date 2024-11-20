@@ -1,39 +1,33 @@
-import { configureStore, combineReducers } from "@reduxjs/toolkit";
-import { persistStore, persistReducer } from "redux-persist";
-import storage from "redux-persist/lib/storage";
-import { registerApi } from "../pages/registerApi";
-import { setupListeners } from "@reduxjs/toolkit/query";
-// Persist configuration
+// src/app/store.js
+import { configureStore } from '@reduxjs/toolkit';
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage'; // Using default localStorage for web
+import loginReducer from '../pages/loginSlice.js';
+
+// Define persist configuration
 const persistConfig = {
-  key: "root",
-  storage,
-  whitelist: ["registerApi"], // Only persist specific reducers if needed
+    key: 'auth',
+    storage, // This uses localStorage to persist the state
 };
 
+// Persist the loginReducer (auth state)
+const persistedLoginReducer = persistReducer(persistConfig, loginReducer);
 
-// Combine reducers
-
-const rootReducer = combineReducers({
-  [registerApi.reducerPath]: registerApi.reducer,
+const store = configureStore({
+    reducer: {
+        auth: persistedLoginReducer, // Use persisted reducer for authentication
+    },
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware({
+            serializableCheck: {
+                ignoredActions: ['persist/PERSIST', 'persist/REHYDRATE'],
+            },
+        }),
 });
 
-// Create persisted reducer
-const persistedReducer = persistReducer(persistConfig, rootReducer);
-
-// Configure store
-export const store = configureStore({
-  reducer: persistedReducer,
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      serializableCheck: {
-        ignoredActions: ["persist/PERSIST"],
-      },
-    }).concat(registerApi.middleware),
-});
-
-// Create persistor
-export const persistor = persistStore(store);
-
+const persistedStore = persistStore(store);
+export { store, persistedStore };
 
 // Set up listeners for RTK Query
 setupListeners(store.dispatch);
+
