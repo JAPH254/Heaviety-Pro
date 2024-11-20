@@ -1,6 +1,8 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'; 
-import Home from './pages/home.jsx'; 
-import Register from './features/register/register.jsx';
+
+import Home from './pages/home';
+import Register from './pages/register';
+import ErrorBoundary from './pages/errorBoundary';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';  
 import ActivateAccount from './pages/ActivateAccount.jsx';
 import Login from './pages/Login.jsx';
 import './App.css';
@@ -19,6 +21,10 @@ function App() {
       path: '/activate-account',
       element: <ActivateAccount />,
     },
+      {
+    path:"/ErrorBoundary",
+    element: <ErrorBoundary />,
+  }
   ]);
 
   console.log('App is rendering');
