@@ -1,3 +1,4 @@
+import React from 'react'; // Import React at the top
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useRegisterUserMutation } from './registerApi';
@@ -117,7 +118,8 @@ const Register = () => {
   const [registerUser, { isLoading }] = useRegisterUserMutation();
   const navigate = useNavigate();
 
-  const onSubmitHandler = async (data) => {
+  // Use useCallback to memoize the onSubmit handler
+  const onSubmitHandler = React.useCallback(async (data) => {
     try {
       await registerUser(data).unwrap();
       reset();
@@ -125,7 +127,7 @@ const Register = () => {
     } catch (err) {
       console.error('Registration failed', err);
     }
-  };
+  }, [registerUser, reset, navigate]);
 
   return (
     <CenteredBox>
