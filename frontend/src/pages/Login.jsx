@@ -55,6 +55,10 @@ const Login = () => {
 
                 {error && <span className="error-message">{error}</span>}
 
+                <p className="forgot-password">
+                    <a href="/forgot-password">Forgot Password?</a>
+                </p>
+
                 
                 
             </form>

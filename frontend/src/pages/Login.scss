@@ -74,6 +74,23 @@
     text-align: left;
     width: 90%; /* Match width */
   }
+  .forgot-password{
+    margin-top: 10px;
+    font-size: 14px;
+    text-align: center;
+    a{
+      color: #4285f4;
+      text-decoration: none;
+      font-weight:600;
+      transition: color 0.3 ease;
+
+      &:hover{
+        color: #357ae8;
+        text-decoration: underline;
+      }
+
+    }
+  }
 
   @media (min-width: 768px) {
     width: 65vw;
