@@ -55,12 +55,11 @@ const Login = () => {
 
                 {error && <span className="error-message">{error}</span>}
 
-                <p className="forgot-password">
-                    <a href="/forgot-password">Forgot Password?</a>
-                </p>
+                <div className="auth-links">
+                <p>Don't have an account? <a href="/signup">Sign Up</a></p>
+                <p>Forgot your password? <a href="/forgot-password">Reset Password</a></p>
 
-                
-                
+                </div>                
             </form>
         </div>
     );
