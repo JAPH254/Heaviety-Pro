@@ -5,6 +5,26 @@ import { useEffect } from "react";
 import { login } from "./loginSlice"; // Adjust the path if necessary
 import "./Login.scss";
 
+// Extracted FormGroup Component
+const FormGroup = ({ type, placeholder, registerProps, error }) => (
+  <div className="form-group">
+    <input type={type} placeholder={placeholder} {...registerProps} />
+    {error && <span className="error-message">{error}</span>}
+  </div>
+);
+
+// Extracted AuthLinks Component
+const AuthLinks = () => (
+  <div className="auth-links">
+    <p>
+      Don&apos;t have an account? <a href="/register">Sign Up</a>
+    </p>
+    <p>
+      Forgot your password? <a href="/forgot-password">Reset Password</a>
+    </p>
+  </div>
+);
+
 const Login = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const dispatch = useDispatch();
@@ -25,46 +45,35 @@ const Login = () => {
     <div className="login-container">
       <form className="login-form" onSubmit={handleSubmit(onSubmit)}>
         <h1>Login</h1>
-        <div className="form-group">
-          <input
-            type="email"
-            placeholder="Email"
-            {...register("email", {
-              required: "Email is required",
-              pattern: {
-                value: /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/,
-                message: "Invalid email address",
-              },
-            })}
-          />
-          {errors.email && <span className="error-message">{errors.email.message}</span>}
-        </div>
-        <div className="form-group">
-          <input
-            type="password"
-            placeholder="Password"
-            {...register("password", {
-              required: "Password is required",
-              minLength: {
-                value: 8,
-                message: "Password must be at least 8 characters long",
-              },
-            })}
-          />
-          {errors.password && <span className="error-message">{errors.password.message}</span>}
-        </div>
+        <FormGroup
+          type="email"
+          placeholder="Email"
+          registerProps={register("email", {
+            required: "Email is required",
+            pattern: {
+              value: /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/,
+              message: "Invalid email address",
+            },
+          })}
+          error={errors.email?.message}
+        />
+        <FormGroup
+          type="password"
+          placeholder="Password"
+          registerProps={register("password", {
+            required: "Password is required",
+            minLength: {
+              value: 8,
+              message: "Password must be at least 8 characters long",
+            },
+          })}
+          error={errors.password?.message}
+        />
         <button type="submit" disabled={loading}>
           {loading ? "Logging in..." : "Login"}
         </button>
         {error && <span className="error-message">{error}</span>}
-        <div className="auth-links">
-          <p>
-            Don&apos;t have an account? <a href="/register">Sign Up</a>
-          </p>
-          <p>
-            Forgot your password? <a href="/forgot-password">Reset Password</a>
-          </p>
-        </div>
+        <AuthLinks />
       </form>
     </div>
   );
