@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { CheckCircleIcon } from "@heroicons/react/24/solid";
@@ -6,8 +6,8 @@ import { CheckCircleIcon } from "@heroicons/react/24/solid";
 const ActivateAccount = () => {
   const { uid, token } = useParams();
   const navigate = useNavigate();
-  const [alertMessage, setAlertMessage] = useState(""); // State to hold alert message
-  const [showAlert, setShowAlert] = useState(false); // State to toggle alert visibility
+  const [alertMessage, setAlertMessage] = useState(""); 
+  const [showAlert, setShowAlert] = useState(false); 
 
   const handleActivation = async () => {
     if (!uid || !token) {
@@ -25,7 +25,7 @@ const ActivateAccount = () => {
       if (response.status === 200) {
         setAlertMessage("Account activated successfully.");
         setShowAlert(true);
-        setTimeout(() => navigate("/login"), 2000); // Navigate after 2 seconds
+        setTimeout(() => navigate("/login"), 2000);
       } else {
         setAlertMessage("Failed to activate account. Please try again.");
         setShowAlert(true);
