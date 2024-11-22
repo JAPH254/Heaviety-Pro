@@ -10,7 +10,7 @@ const PasswordReset = () => {
 
   const onSubmit = async (data) => {
     try {
-      const response = await axios.post('YOUR_BACKEND_URL/reset-password', { email: data.email });
+      await axios.post('http://127.0.0.1:8000/auth/users/login/', { email: data.email });
       setResetSuccess(true );
     } catch (error) {
       setResetError('An error occurred. Please try again.');

@@ -6,7 +6,7 @@ import axios from 'axios';
 export const login = createAsyncThunk('auth/login', async (credentials, { rejectWithValue }) => {
     try {
         // Make a POST request to the login API
-        const response = await axios.post('http://localhost:8080/api/login', credentials, {
+        const response = await axios.post('http://localhost:8000/auth/login', credentials, {
             headers: {
                 'Content-Type': 'application/json', // Ensure correct content type
             },

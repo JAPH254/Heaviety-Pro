@@ -123,7 +123,7 @@ const Register = () => {
     try {
       await registerUser(data).unwrap();
       reset();
-      navigate('/login');
+      navigate('/activateaccout');
     } catch (err) {
       console.error('Registration failed', err);
     }
