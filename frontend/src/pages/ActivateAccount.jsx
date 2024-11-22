@@ -1,4 +1,4 @@
-
+import React, { useState, useCallback } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { CheckCircleIcon } from "@heroicons/react/24/solid";
@@ -9,7 +9,7 @@ const ActivateAccount = () => {
   const [alertMessage, setAlertMessage] = useState(""); 
   const [showAlert, setShowAlert] = useState(false); 
 
-  const handleActivation = async () => {
+  const handleActivation = useCallback(async () => {
     if (!uid || !token) {
       setAlertMessage("Invalid activation link. Please try again.");
       setShowAlert(true);
@@ -37,7 +37,11 @@ const ActivateAccount = () => {
       );
       setShowAlert(true);
     }
-  };
+  }, [uid, token, navigate]);
+
+  const handleAlertClose = useCallback(() => {
+    setShowAlert(false);
+  }, []);
 
   const CustomAlert = ({ message, onClose }) => (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
@@ -75,7 +79,7 @@ const ActivateAccount = () => {
       {showAlert && (
         <CustomAlert
           message={alertMessage}
-          onClose={() => setShowAlert(false)} // Close alert on button click
+          onClose={handleAlertClose} // Pass the memoized function
         />
       )}
     </div>
