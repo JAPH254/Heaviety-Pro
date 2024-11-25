@@ -1,7 +1,8 @@
 import React from 'react'; // Import React at the top
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { useRegisterUserMutation } from './registerApi';
+import registerApi from './registerApi';
+
 
 // CenteredBox: A layout component for centering content
 const CenteredBox = ({ children }) => (
@@ -19,29 +20,61 @@ const Heading = () => (
   <h2 className="text-3xl font-extrabold text-gray-900">Create your account</h2>
 );
 
-// RegisterForm: A form component
-const RegisterForm = ({ onSubmit, register, handleSubmit, errors, isLoading }) => (
+
+const Register = () => {
+  const { register, handleSubmit, reset, formState: { errors } } = useForm();
+  const [registerUser, { isLoading }] = registerApi.useRegisterUserMutation();
+  const navigate = useNavigate();
+
+  // Use useCallback to memoize the onSubmit handler
+  const onSubmit = async (data) => {
+    try {
+      console.log(data)
+
+      await registerUser(data).unwrap();
+      reset();
+      
+      navigate('/login');
+      
+    } catch (error) {
+      console.error('Registration failed', error);
+    }}
+
+  return (
+    <CenteredBox>
+      <Heading />
+      {/* <RegisterForm
+        onSubmit={onSubmitHandler}
+        register={register}
+        handleSubmit={handleSubmit}
+        errors={errors}
+        isLoading={isLoading}
+      /> */}
+
+
+
+  
   <form className="mt-8 space-y-6" onSubmit={handleSubmit(onSubmit)}>
     <div>
-      <label htmlFor="firstName" className="block text-lg font-medium text-gray-700">First Name</label>
+      <label htmlFor="first name" className="block text-lg font-medium text-gray-700">First Name</label>
       <input
-        id="firstName"
+        id="first name"
         type="text"
-        {...register('firstName', { required: 'First name is required' })}
+        {...register('first name', { required: 'first name  is required' })}
         className="mt-2 px-3 py-2 w-full border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
       />
-      {errors.firstName && <p className="text-red-500 text-sm">{errors.firstName.message}</p>}
+      {errors.first_name && <p className="text-red-500 text-sm">{errors.first_name.message}</p>}
     </div>
 
     <div>
-      <label htmlFor="lastName" className="block text-lg font-medium text-gray-700">Last Name</label>
+      <label htmlFor="last name" className="block text-lg font-medium text-gray-700">Last Name</label>
       <input
-        id="lastName"
+        id="last name"
         type="text"
-        {...register('lastName', { required: 'Last name is required' })}
+        {...register('last name', { required: 'last name is required' })}
         className="mt-2 px-3 py-2 w-full border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
       />
-      {errors.lastName && <p className="text-red-500 text-sm">{errors.lastName.message}</p>}
+      {errors.last_name && <p className="text-red-500 text-sm">{errors.last_name.message}</p>}
     </div>
 
     <div>
@@ -56,11 +89,11 @@ const RegisterForm = ({ onSubmit, register, handleSubmit, errors, isLoading }) =
     </div>
 
     <div>
-      <label htmlFor="email" className="block text-lg font-medium text-gray-700">Email</label>
+      <label htmlFor="email address" className="block text-lg font-medium text-gray-700">Email</label>
       <input
-        id="email"
+        id="email address"
         type="email"
-        {...register('email', { required: 'Email is required' })}
+        {...register('email address', { required: 'email address is required' })}
         className="mt-2 px-3 py-2 w-full border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
       />
       {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
@@ -110,40 +143,20 @@ const RegisterForm = ({ onSubmit, register, handleSubmit, errors, isLoading }) =
       {isLoading ? 'Creating account...' : 'Create Account'}
     </button>
   </form>
-);
 
-// Register: The main registration page
-const Register = () => {
-  const { register, handleSubmit, reset, formState: { errors } } = useForm();
-  const [registerUser, { isLoading }] = useRegisterUserMutation();
-  const navigate = useNavigate();
 
-  // Use useCallback to memoize the onSubmit handler
-  const onSubmitHandler = React.useCallback(async (data) => {
-    try {
-      await registerUser(data).unwrap();
-      reset();
-      navigate('/login');
-    } catch (err) {
-      console.error('Registration failed', err);
-    }
-  }, [registerUser, reset, navigate]);
 
-  return (
-    <CenteredBox>
-      <Heading />
-      <RegisterForm
-        onSubmit={onSubmitHandler}
-        register={register}
-        handleSubmit={handleSubmit}
-        errors={errors}
-        isLoading={isLoading}
-      />
       <Link to="/login" className="mt-4 block text-blue-600 hover:text-blue-700">
         Already have an account? Login
       </Link>
     </CenteredBox>
   );
 };
+
+// RegisterForm: A form component
+
+
+// Register: The main registration page
+
 
 export default Register;
