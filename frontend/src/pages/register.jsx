@@ -1,4 +1,4 @@
-import React from 'react'; // Import React at the top
+
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import registerApi from './registerApi';
