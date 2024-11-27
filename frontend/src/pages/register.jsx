@@ -2,6 +2,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useRegisterUserMutation } from './registerApi';
 import { ScaleLoader } from 'react-spinners';
+import React from 'react';
 
 // CenteredBox: A layout component for centering content
 const CenteredBox = ({ children }) => (
@@ -115,26 +116,28 @@ const Register = () => {
   const [registerUser, { isLoading }] = useRegisterUserMutation();
   const navigate = useNavigate();
 
-  // Define the submit handler
-  const onSubmitHandler = async (data) => {
-    try {
-      console.log('Request payload:', data);
-      await registerUser(data).unwrap();
-      reset();
-      navigate('/login');
-    } catch (error) {
-      if (error.originalStatus === 500) {
-        console.error('Server error: Check backend implementation.');
-      } else {
-        console.error('Registration failed', error);
+  // Memoized submit handler using React.useCallback
+  const onSubmitHandler = React.useCallback(
+    async (data) => {
+      try {
+        console.log('Request payload:', data);
+        await registerUser(data).unwrap();
+        reset();
+        navigate('/login');
+      } catch (error) {
+        if (error.originalStatus === 500) {
+          console.error('Server error: Check backend implementation.');
+        } else {
+          console.error('Registration failed', error);
+        }
       }
-    }
-  };
+    },
+    [registerUser, reset, navigate] // Dependencies
+  );
 
   return (
     <CenteredBox>
       <Heading />
-      {/* Pass the handler directly as a reference */}
       <RegisterForm
         onSubmit={onSubmitHandler}
         register={register}
