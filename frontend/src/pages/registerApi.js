@@ -5,13 +5,13 @@ import BASE_URL from "./baseUrl"; // Import the base URL
 export const registerApi = createApi({
   reducerPath: "registerApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: `${BASE_URL}/auth/users/`, // Use the imported base URL
+    baseUrl: `${BASE_URL}/auth/`, // Use the imported base URL
   }),
   endpoints: (builder) => ({
     // Login user mutation
     loginUser: builder.mutation({
       query: (user) => ({
-        url: "login",
+        url: "login/",
         method: "POST",
         body: user,
       }),
@@ -20,7 +20,7 @@ export const registerApi = createApi({
     // Register user mutation
     registerUser: builder.mutation({
       query: (user) => ({
-        url: "register/",
+        url: "users/",
         method: "POST",
         body: user,
       }),
