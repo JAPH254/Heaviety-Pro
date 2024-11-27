@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { FaUser, FaCog, FaSignOutAlt, FaBell } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import "./Dashboard.scss"; // Import the SCSS file
@@ -6,9 +6,14 @@ import "./Dashboard.scss"; // Import the SCSS file
 const Dashboard = () => {
   const [isSidebarOpen, setSidebarOpen] = useState(true);
 
-  const toggleSidebar = () => {
-    setSidebarOpen(!isSidebarOpen);
-  };
+  const toggleSidebar = useCallback(() => {
+    setSidebarOpen((prev) => !prev);
+  }, []);
+
+  const handleLogout = useCallback(() => {
+    console.log("Logging out");
+    // Add your logout logic here
+  }, []);
 
   return (
     <div className="dashboard">
@@ -49,7 +54,7 @@ const Dashboard = () => {
               </Link>
             </li>
             <li>
-              <button className="sidebar-link" onClick={() => console.log("Logging out")}>
+              <button className="sidebar-link" onClick={handleLogout}>
                 <FaSignOutAlt />
                 <span className={`link-text ${isSidebarOpen ? "" : "hidden"}`}>
                   Log out
