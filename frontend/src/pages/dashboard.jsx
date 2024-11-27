@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import  { useState, useCallback } from "react";
 import { FaUser, FaCog, FaSignOutAlt, FaBell } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import "./Dashboard.scss"; // Import the SCSS file
