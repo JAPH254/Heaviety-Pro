@@ -33,7 +33,7 @@ const RegisterForm = ({ onSubmit, register, handleSubmit, errors, isLoading, wat
       />
       {errors.first_name && <p className="text-red-500 text-sm">{errors.first_name.message}</p>}
     </div>
-    {/* Other Input Fields */}
+    {/* Last Name */}
     <div>
       <label htmlFor="last_name" className="block text-lg font-medium text-gray-700">Last Name</label>
       <input
@@ -44,6 +44,7 @@ const RegisterForm = ({ onSubmit, register, handleSubmit, errors, isLoading, wat
       />
       {errors.last_name && <p className="text-red-500 text-sm">{errors.last_name.message}</p>}
     </div>
+    {/* Username */}
     <div>
       <label htmlFor="username" className="block text-lg font-medium text-gray-700">Username</label>
       <input
@@ -54,6 +55,7 @@ const RegisterForm = ({ onSubmit, register, handleSubmit, errors, isLoading, wat
       />
       {errors.username && <p className="text-red-500 text-sm">{errors.username.message}</p>}
     </div>
+    {/* Email */}
     <div>
       <label htmlFor="email" className="block text-lg font-medium text-gray-700">Email</label>
       <input
@@ -64,6 +66,7 @@ const RegisterForm = ({ onSubmit, register, handleSubmit, errors, isLoading, wat
       />
       {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
     </div>
+    {/* Password */}
     <div>
       <label htmlFor="password" className="block text-lg font-medium text-gray-700">Password</label>
       <input
@@ -74,6 +77,7 @@ const RegisterForm = ({ onSubmit, register, handleSubmit, errors, isLoading, wat
       />
       {errors.password && <p className="text-red-500 text-sm">{errors.password.message}</p>}
     </div>
+    {/* Confirm Password */}
     <div>
       <label htmlFor="re_password" className="block text-lg font-medium text-gray-700">Confirm Password</label>
       <input
@@ -111,9 +115,10 @@ const Register = () => {
   const [registerUser, { isLoading }] = useRegisterUserMutation();
   const navigate = useNavigate();
 
+  // Define the submit handler
   const onSubmitHandler = async (data) => {
     try {
-      console.log('Request payload:', data)
+      console.log('Request payload:', data);
       await registerUser(data).unwrap();
       reset();
       navigate('/login');
@@ -121,7 +126,7 @@ const Register = () => {
       if (error.originalStatus === 500) {
         console.error('Server error: Check backend implementation.');
       } else {
-      console.error('Registration failed', error);
+        console.error('Registration failed', error);
       }
     }
   };
@@ -129,6 +134,7 @@ const Register = () => {
   return (
     <CenteredBox>
       <Heading />
+      {/* Pass the handler directly as a reference */}
       <RegisterForm
         onSubmit={onSubmitHandler}
         register={register}
