@@ -1,9 +1,8 @@
-import React from 'react'; // Import React at the top
+import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useRegisterUserMutation } from './registerApi';
 
-// CenteredBox: A layout component for centering content
 const CenteredBox = ({ children }) => (
   <div className="flex flex-col min-h-full bg-gradient-to-b from-blue-500 to-purple-600 p-4">
     <div className="flex items-center justify-center flex-grow">
@@ -14,36 +13,44 @@ const CenteredBox = ({ children }) => (
   </div>
 );
 
-// Heading: A component for the heading
 const Heading = () => (
   <h2 className="text-3xl font-extrabold text-gray-900">Create your account</h2>
 );
 
-// RegisterForm: A form component
-const RegisterForm = ({ onSubmit, register, handleSubmit, errors, isLoading }) => (
+const RegisterForm = ({
+  onSubmit,
+  register,
+  handleSubmit,
+  errors,
+  isLoading,
+  watch,
+}) => (
   <form className="mt-8 space-y-6" onSubmit={handleSubmit(onSubmit)}>
+    {/* First Name */}
     <div>
-      <label htmlFor="firstName" className="block text-lg font-medium text-gray-700">First Name</label>
+      <label htmlFor="first_name" className="block text-lg font-medium text-gray-700">First Name</label>
       <input
-        id="firstName"
+        id="first_name"
         type="text"
-        {...register('firstName', { required: 'First name is required' })}
+        {...register('first_name', { required: 'First name is required' })}
         className="mt-2 px-3 py-2 w-full border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
       />
-      {errors.firstName && <p className="text-red-500 text-sm">{errors.firstName.message}</p>}
+      {errors.first_name && <p className="text-red-500 text-sm">{errors.first_name.message}</p>}
     </div>
 
+    {/* Last Name */}
     <div>
-      <label htmlFor="lastName" className="block text-lg font-medium text-gray-700">Last Name</label>
+      <label htmlFor="last_name" className="block text-lg font-medium text-gray-700">Last Name</label>
       <input
-        id="lastName"
+        id="last_name"
         type="text"
-        {...register('lastName', { required: 'Last name is required' })}
+        {...register('last_name', { required: 'Last name is required' })}
         className="mt-2 px-3 py-2 w-full border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
       />
-      {errors.lastName && <p className="text-red-500 text-sm">{errors.lastName.message}</p>}
+      {errors.last_name && <p className="text-red-500 text-sm">{errors.last_name.message}</p>}
     </div>
 
+    {/* Username */}
     <div>
       <label htmlFor="username" className="block text-lg font-medium text-gray-700">Username</label>
       <input
@@ -55,6 +62,7 @@ const RegisterForm = ({ onSubmit, register, handleSubmit, errors, isLoading }) =
       {errors.username && <p className="text-red-500 text-sm">{errors.username.message}</p>}
     </div>
 
+    {/* Email */}
     <div>
       <label htmlFor="email" className="block text-lg font-medium text-gray-700">Email</label>
       <input
@@ -66,6 +74,7 @@ const RegisterForm = ({ onSubmit, register, handleSubmit, errors, isLoading }) =
       {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
     </div>
 
+    {/* Phone */}
     <div>
       <label htmlFor="phone" className="block text-lg font-medium text-gray-700">Phone Number</label>
       <input
@@ -80,6 +89,7 @@ const RegisterForm = ({ onSubmit, register, handleSubmit, errors, isLoading }) =
       {errors.phone && <p className="text-red-500 text-sm">{errors.phone.message}</p>}
     </div>
 
+    {/* Address */}
     <div>
       <label htmlFor="address" className="block text-lg font-medium text-gray-700">Address</label>
       <input
@@ -91,16 +101,36 @@ const RegisterForm = ({ onSubmit, register, handleSubmit, errors, isLoading }) =
       {errors.address && <p className="text-red-500 text-sm">{errors.address.message}</p>}
     </div>
 
+    {/* Password */}
     <div>
       <label htmlFor="password" className="block text-lg font-medium text-gray-700">Password</label>
       <input
         id="password"
         type="password"
-        {...register('password', { required: 'Password is required' })}
+        {...register('password', {
+          required: 'Password is required',
+          minLength: { value: 6, message: 'Password must be at least 6 characters long' },
+        })}
         className="mt-2 px-3 py-2 w-full border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
       />
       {errors.password && <p className="text-red-500 text-sm">{errors.password.message}</p>}
     </div>
+
+    {/* Confirm Password */}
+    <div>
+        <label htmlFor="re_password" className="block text-lg font-medium text-gray-700">Confirm Password</label>
+        <input
+          id="re_password"
+          type="password"
+          {...register('re_password', {
+            required: 'Please confirm your password',
+            validate: (value) =>
+              value === watch("password") || 'Passwords do not match', // Access watch here
+          })}
+          className="mt-2 px-3 py-2 w-full border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+        {errors.re_password && <p className="text-red-500 text-sm">{errors.re_password.message}</p>}
+      </div>
 
     <button
       type="submit"
@@ -112,22 +142,22 @@ const RegisterForm = ({ onSubmit, register, handleSubmit, errors, isLoading }) =
   </form>
 );
 
-// Register: The main registration page
 const Register = () => {
-  const { register, handleSubmit, reset, formState: { errors } } = useForm();
+  const { register, handleSubmit, reset, formState: { errors }, watch } = useForm();
   const [registerUser, { isLoading }] = useRegisterUserMutation();
   const navigate = useNavigate();
 
-  // Use useCallback to memoize the onSubmit handler
-  const onSubmitHandler = React.useCallback(async (data) => {
+  const onSubmitHandler = async (data) => {
+    const { confirmPassword, ...userData } = data; // Exclude confirmPassword before sending
+    console.log(data)
     try {
-      await registerUser(data).unwrap();
+      await registerUser(userData).unwrap();
       reset();
-      navigate('/activateaccout');
+      navigate( '/activateaccout');
     } catch (err) {
       console.error('Registration failed', err);
     }
-  }, [registerUser, reset, navigate]);
+  };
 
   return (
     <CenteredBox>
@@ -138,6 +168,7 @@ const Register = () => {
         handleSubmit={handleSubmit}
         errors={errors}
         isLoading={isLoading}
+        watch={watch}
       />
       <Link to="/login" className="mt-4 block text-blue-600 hover:text-blue-700">
         Already have an account? Login
