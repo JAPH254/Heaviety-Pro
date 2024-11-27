@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useRegisterUserMutation } from './registerApi';
@@ -148,7 +148,6 @@ const Register = () => {
   const navigate = useNavigate();
 
   const onSubmitHandler = async (data) => {
-    const { confirmPassword, ...userData } = data; // Exclude confirmPassword before sending
     console.log(data)
     try {
       await registerUser(userData).unwrap();
