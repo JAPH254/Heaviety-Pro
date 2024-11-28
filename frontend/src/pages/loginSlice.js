@@ -7,8 +7,7 @@ export const login = createAsyncThunk('auth/login', async (credentials, { reject
         const response = await axios.post('http://127.0.0.1:8000/auth/jwt/create/', credentials, {
             headers: { 'Content-Type': 'application/json' },
         });
-        if(response.data && 
-             response.data.access && response.data.refresh){
+        if( response.data.access && response.data.refresh){
             return response.data;
         }else{
             throw new Error("Invalid response format");   
