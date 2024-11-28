@@ -1,5 +1,5 @@
-import React, { useState, useCallback } from "react";
-import Sidebar from "../pages/Sidebar.jsx";
+import  { useState, useCallback } from "react";
+import Sidebar from "./Sidebar.jsx";
 
 const Dashboard = () => {
   const [isSidebarOpen, setSidebarOpen] = useState(true);
