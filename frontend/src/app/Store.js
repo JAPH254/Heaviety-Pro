@@ -5,7 +5,7 @@ import {setupListeners} from "@reduxjs/toolkit/query";
 
 // import authReducer from "../pages/loginSlice"
 // import userProfileReducer from '../pages/userProfileSlice'; 
-import registerApi from "../pages/registerApi";
+// import registerApi from "../pages/registerApi";
 
 const persistConfig ={
     key:'root',
