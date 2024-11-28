@@ -1,4 +1,4 @@
-import { useState, useCallback, createContext, useContext } from "react";
+import { useState, useCallback, createContext} from "react";
 import Sidebar from "./Sidebar.jsx";
 
 const SidebarContext = createContext();
