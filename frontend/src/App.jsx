@@ -7,7 +7,7 @@ import Login from './pages/Login.jsx';
 import './App.css';
 import Error from "./pages/Error.jsx"
 import  PasswordReset from "./pages/PasswordReset.jsx"
-import UserProfile from "./pages/userProfile.jsx";
+// import UserProfile from "./pages/userProfile.jsx";
 import Dashboard from './pages/dashboard.jsx';
 
 function App() {
@@ -38,9 +38,9 @@ function App() {
       errorElement:<Error/>
     },
     {
-      path:'/userprofile',
-      element:<UserProfile/>,
-      errorElement:<Error/>
+      // path:'/userprofile',
+      // element:<UserProfile/>,
+      // errorElement:<Error/>
 
     },
     {

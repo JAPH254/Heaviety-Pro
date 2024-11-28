@@ -41,7 +41,6 @@ const Login = () => {
       navigate(DASHBOARD_ROUTE); // Navigate to the dashboard on successful login
     } catch (err) {
       console.error("Login failed:", err);
-      alert(err.non_field_errors || "Invalid credentials");
     }
   };
 

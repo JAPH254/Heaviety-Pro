@@ -148,6 +148,7 @@ const Register = () => {
   const navigate = useNavigate();
 
   const onSubmitHandler = async (data) => {
+    const {...userData } = data; // Exclude confirmPassword before sending
     console.log(data)
     try {
       await registerUser(userData).unwrap();
