@@ -90,14 +90,6 @@ const Dashboard = () => {
               </li>
             </ul>
           </div>
-          <div className="card">
-            <h3 className="card-title">Recent Activity</h3>
-            <ul className="card-list">
-              <li>Posted a new comment on &quot;Article 1&quot;</li>
-              <li>Joined &quot;Community Group 3&quot;</li>
-              <li>Updated profile picture</li>
-            </ul>
-          </div>
         </div>
       </div>
     </div>
