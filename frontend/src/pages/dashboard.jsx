@@ -1,4 +1,4 @@
-import  { useState, useCallback } from "react";
+import { useState, useCallback } from "react";
 import { FaUser, FaCog, FaSignOutAlt, FaBell } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import "./Dashboard.scss"; // Import the SCSS file
@@ -93,17 +93,9 @@ const Dashboard = () => {
           <div className="card">
             <h3 className="card-title">Recent Activity</h3>
             <ul className="card-list">
-              <li>Posted a new comment on "Article 1"</li>
-              <li>Joined "Community Group 3"</li>
+              <li>Posted a new comment on &quot;Article 1&quot;</li>
+              <li>Joined &quot;Community Group 3&quot;</li>
               <li>Updated profile picture</li>
-            </ul>
-          </div>
-          <div className="card">
-            <h3 className="card-title">Upcoming Tasks</h3>
-            <ul className="card-list">
-              <li>Complete profile setup</li>
-              <li>Join the next webinar</li>
-              <li>Review your settings</li>
             </ul>
           </div>
         </div>
