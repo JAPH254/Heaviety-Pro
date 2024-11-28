@@ -1,5 +1,5 @@
 import Home from './pages/home';
-import Register from './pages/register';
+// import Register from './pages/register';
 import ErrorBoundary from './pages/errorBoundary';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';  
 import ActivateAccount from './pages/ActivateAccount.jsx';
@@ -17,11 +17,11 @@ function App() {
       element: <Home />,
       errorElement:<Error/>
     },
-    {
-      path: '/register',
-      element: <Register />,
-      errorElement:<Error/>
-    },
+    // {
+    //   path: '/register',
+    //   element: <Register />,
+    //   errorElement:<Error/>
+    // },
     {
       path: '/login',
       element: <Login />,
