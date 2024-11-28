@@ -1,7 +1,7 @@
 import { useState, useCallback } from "react";
 import { FaUser, FaCog, FaSignOutAlt, FaBell } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import "./Dashboard.scss"; // Import the SCSS file
+import "./Dashboard.scss";
 
 const Dashboard = () => {
   const [isSidebarOpen, setSidebarOpen] = useState(true);
@@ -15,57 +15,61 @@ const Dashboard = () => {
     // Add your logout logic here
   }, []);
 
+  // Helper to render the sidebar
+  const renderSidebar = () => (
+    <div className={`sidebar ${isSidebarOpen ? "open" : "collapsed"}`}>
+      <div className="sidebar-header">
+        <h2 className={`sidebar-title ${isSidebarOpen ? "" : "hidden"}`}>
+          Dashboard
+        </h2>
+        <button className="sidebar-toggle" onClick={toggleSidebar}>
+          {isSidebarOpen ? "Collapse" : "Expand"}
+        </button>
+      </div>
+      <nav className="sidebar-nav">
+        <ul>
+          {[
+            { to: "/profile", icon: <FaUser />, label: "Profile" },
+            { to: "/settings", icon: <FaCog />, label: "Settings" },
+            { to: "/notifications", icon: <FaBell />, label: "Notifications" },
+          ].map(({ to, icon, label }) => (
+            <li key={to}>
+              <Link to={to} className="sidebar-link">
+                {icon}
+                <span className={`link-text ${isSidebarOpen ? "" : "hidden"}`}>
+                  {label}
+                </span>
+              </Link>
+            </li>
+          ))}
+          <li>
+            <button className="sidebar-link" onClick={handleLogout}>
+              <FaSignOutAlt />
+              <span className={`link-text ${isSidebarOpen ? "" : "hidden"}`}>
+                Log out
+              </span>
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  );
+
+  // Helper to render a single card
+  const renderCard = (title, items) => (
+    <div className="card">
+      <h3 className="card-title">{title}</h3>
+      <ul className="card-list">
+        {items.map((item, index) => (
+          <li key={index}>{item}</li>
+        ))}
+      </ul>
+    </div>
+  );
+
   return (
     <div className="dashboard">
-      {/* Sidebar */}
-      <div className={`sidebar ${isSidebarOpen ? "open" : "collapsed"}`}>
-        <div className="sidebar-header">
-          <h2 className={`sidebar-title ${isSidebarOpen ? "" : "hidden"}`}>
-            Dashboard
-          </h2>
-          <button className="sidebar-toggle" onClick={toggleSidebar}>
-            {isSidebarOpen ? "Collapse" : "Expand"}
-          </button>
-        </div>
-        <nav className="sidebar-nav">
-          <ul>
-            <li>
-              <Link to="/profile" className="sidebar-link">
-                <FaUser />
-                <span className={`link-text ${isSidebarOpen ? "" : "hidden"}`}>
-                  Profile
-                </span>
-              </Link>
-            </li>
-            <li>
-              <Link to="/settings" className="sidebar-link">
-                <FaCog />
-                <span className={`link-text ${isSidebarOpen ? "" : "hidden"}`}>
-                  Settings
-                </span>
-              </Link>
-            </li>
-            <li>
-              <Link to="/notifications" className="sidebar-link">
-                <FaBell />
-                <span className={`link-text ${isSidebarOpen ? "" : "hidden"}`}>
-                  Notifications
-                </span>
-              </Link>
-            </li>
-            <li>
-              <button className="sidebar-link" onClick={handleLogout}>
-                <FaSignOutAlt />
-                <span className={`link-text ${isSidebarOpen ? "" : "hidden"}`}>
-                  Log out
-                </span>
-              </button>
-            </li>
-          </ul>
-        </nav>
-      </div>
-
-      {/* Main Content */}
+      {renderSidebar()}
       <div className="main-content">
         <div className="top-bar">
           <h1 className="welcome-message">Welcome, User!</h1>
@@ -74,30 +78,20 @@ const Dashboard = () => {
             <button className="btn profile-btn">Profile</button>
           </div>
         </div>
-
         <div className="dashboard-content">
-          <div className="card">
-            <h3 className="card-title">User Info</h3>
-            <ul className="card-list">
-              <li>
-                <strong>Name:</strong> John Doe
-              </li>
-              <li>
-                <strong>Email:</strong> john.doe@example.com
-              </li>
-              <li>
-                <strong>Joined:</strong> January 2023
-              </li>
-            </ul>
-          </div>
-          <div className="card">
-            <h3 className="card-title">Recent Activity</h3>
-            <ul className="card-list">
-              <li>Posted a new comment on &quot;Article 1&quot;</li>
-              <li>Joined &quot;Community Group 3&quot;</li>
-              <li>Updated profile picture</li>
-            </ul>
-          </div>
+          {renderCard("User Info", [
+            <strong key="name">Name:</strong>,
+            <span key="userName">John Doe</span>,
+            <strong key="email">Email:</strong>,
+            <span key="userEmail">john.doe@example.com</span>,
+            <strong key="joined">Joined:</strong>,
+            <span key="joinedDate">January 2023</span>,
+          ])}
+          {renderCard("Recent Activity", [
+            "Posted a new comment on \"Article 1\"",
+            "Joined \"Community Group 3\"",
+            "Updated profile picture",
+          ])}
         </div>
       </div>
     </div>
