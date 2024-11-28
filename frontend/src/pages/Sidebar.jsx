@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { FaUser, FaCog, FaBell, FaSignOutAlt } from "react-icons/fa";
-import "./Sidebar.scss";
+import "./dashboard.scss";
 
 const Sidebar = ({ isSidebarOpen, toggleSidebar, handleLogout }) => {
   return (
