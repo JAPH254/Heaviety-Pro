@@ -1,4 +1,4 @@
-import React from "react";
+
 import { Link } from "react-router-dom";
 import { FaUser, FaCog, FaBell, FaSignOutAlt } from "react-icons/fa";
 import "./Sidebar.scss"; // Import the specific styles for Sidebar
