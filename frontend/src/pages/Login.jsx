@@ -31,23 +31,13 @@ const Login = () => {
   const navigate = useNavigate();
   const { loading, error, isAuthenticated } = useSelector((state) => state.auth);
 
-  const DASHBOARD_ROUTE = "/dashboard"; // Define the route for successful login navigation
-
-  const onSubmit = async (data) => {
-    try {
-      const response = await dispatch(login({ email: data.email, password: data.password })).unwrap();
-      localStorage.setItem("refresh", response.refresh);
-      localStorage.setItem("access",response.access);
-      navigate(DASHBOARD_ROUTE); // Navigate to the dashboard on successful login
-    } catch (err) {
-      console.error("Login failed:", err);
-    }
+  const onSubmit = (data) => {
+    dispatch(login({ email: data.email, password: data.password }));
   };
 
-  // Navigate to the dashboard if the user is already authenticated
   useEffect(() => {
     if (isAuthenticated) {
-      navigate(DASHBOARD_ROUTE);
+      navigate("/dashboard");
     }
   }, [isAuthenticated, navigate]);
 
