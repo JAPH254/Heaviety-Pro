@@ -32,3 +32,4 @@ export const registerApi = createApi({
 export const { useLoginUserMutation, useRegisterUserMutation } = registerApi;
 
 export default registerApi;
+

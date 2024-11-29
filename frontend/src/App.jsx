@@ -1,5 +1,5 @@
 import Home from './pages/home';
-import Register from './pages/register';
+// import Register from './pages/register';
 import ErrorBoundary from './pages/errorBoundary';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';  
 import ActivateAccount from './pages/ActivateAccount.jsx';
@@ -7,7 +7,12 @@ import Login from './pages/Login.jsx';
 import './App.css';
 import Error from "./pages/Error.jsx"
 import  PasswordReset from "./pages/PasswordReset.jsx"
+
+// import UserProfile from "./pages/userProfile.jsx";
+import Dashboard from './pages/dashboard.jsx';
+
 import ResetPasswordConfirmation from "./pages/ResetPasswordConfirmation.jsx"
+
 function App() {
   const router = createBrowserRouter([
     {
@@ -15,11 +20,11 @@ function App() {
       element: <Home />,
       errorElement:<Error/>
     },
-    {
-      path: '/register',
-      element: <Register />,
-      errorElement:<Error/>
-    },
+    // {
+    //   path: '/register',
+    //   element: <Register />,
+    //   errorElement:<Error/>
+    // },
     {
       path: '/login',
       element: <Login />,
@@ -34,8 +39,17 @@ function App() {
       path:'/forgot-password',
       element:<PasswordReset/>,
       errorElement:<Error/>
-    
+    },
+    {
+      // path:'/userprofile',
+      // element:<UserProfile/>,
+      // errorElement:<Error/>
 
+    },
+    {
+      path: '/dashboard',
+      element: <Dashboard/>,
+      errorElement:<Error/>
     },
     {
     path:"/ErrorBoundary",
