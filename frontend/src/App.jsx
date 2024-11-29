@@ -7,7 +7,7 @@ import Login from './pages/Login.jsx';
 import './App.css';
 import Error from "./pages/Error.jsx"
 import  PasswordReset from "./pages/PasswordReset.jsx"
-
+import ResetPasswordConfirmation from "./pages/ResetPasswordConfirmation.jsx"
 function App() {
   const router = createBrowserRouter([
     {
@@ -40,6 +40,16 @@ function App() {
     {
     path:"/ErrorBoundary",
     element: <ErrorBoundary />,
+    errorElement:<Error/>
+  }
+  ,{
+    path:"/activate/:uid/:token",
+    element: <ActivateAccount />,
+    errorElement:<Error/>
+  }
+  ,{
+    path:"/reset-password/:uid/:token",
+    element: <ResetPasswordConfirmation />,
     errorElement:<Error/>
   }
   ]);
