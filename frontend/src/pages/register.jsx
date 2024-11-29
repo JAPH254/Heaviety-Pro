@@ -115,8 +115,6 @@ const Register = () => {
   const { register, handleSubmit, reset, formState: { errors }, watch } = useForm();
   const [registerUser, { isLoading }] = useRegisterUserMutation();
   const navigate = useNavigate();
-
-  // Memoized submit handler using React.useCallback
   const onSubmitHandler = React.useCallback(
     async (data) => {
       try {
