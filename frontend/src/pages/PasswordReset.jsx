@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios'; // Import axios for API requests
 import './PasswordReset.scss'; // Import SCSS styling
+import { BASE_URL } from './baseUrl';
 
 const PasswordReset = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
@@ -10,7 +11,7 @@ const PasswordReset = () => {
 
   const onSubmit = async (data) => {
     try {
-      await axios.post('http://127.0.0.1:8000/auth/users/login/', { email: data.email });
+      await axios.post(`${BASE_URL}/auth/users/reset_password/`, { email: data.email });
       setResetSuccess(true );
     } catch (error) {
       setResetError('An error occurred. Please try again.');

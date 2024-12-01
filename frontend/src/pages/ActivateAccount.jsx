@@ -17,7 +17,7 @@ const ActivateAccount = () => {
     }
 
     try {
-      const response = await axios.post("http://127.0.0.1:8000/auth/users/activation/", {
+      const response = await axios.post("http://127.0.0.1:8000/activate/uid/token", {
         uid,
         token,
       });

@@ -1,10 +1,10 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-
+import { BASE_URL } from './baseUrl';
 // Async thunk for login
 export const login = createAsyncThunk('auth/login', async (credentials, { rejectWithValue }) => {
     try {
-        const response = await axios.post('http://127.0.0.1:8000/auth/jwt/create/', credentials, {
+        const response = await axios.post(`${BASE_URL}/auth/jwt/create`, credentials, {
             headers: { 'Content-Type': 'application/json' },
         });
         if( response.data.access && response.data.refresh){
