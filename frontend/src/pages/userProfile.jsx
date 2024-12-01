@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+
 import { useFetchUserByIdQuery } from "../api/userProfileApi"; // Assuming you have RTK Query setup
 
 const UserProfile = ({ userId }) => {
