@@ -4,6 +4,7 @@ import ErrorBoundary from './pages/errorBoundary';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';  
 import ActivateAccount from './pages/ActivateAccount.jsx';
 import Login from './pages/Login.jsx';
+import UserProfile from './pages/userProfile.jsx';
 import './App.css';
 
 function App() {
@@ -27,7 +28,11 @@ function App() {
     {
     path:"/ErrorBoundary",
     element: <ErrorBoundary />,
-  }
+   },
+   {
+    path: '/userProfile',
+    element: <UserProfile/>,
+  },
   ]);
 
   console.log('App is rendering');
