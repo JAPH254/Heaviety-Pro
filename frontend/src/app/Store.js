@@ -2,8 +2,8 @@ import {configureStore, combineReducers} from "@reduxjs/toolkit";
 import {persistReducer, persistStore} from "redux-persist";
 import storage from 'redux-persist/lib/storage';
 import {setupListeners} from "@reduxjs/toolkit/query";
-import authReducer from "../pages/loginSlice"
-import registerApi from "../pages/registerApi";
+import authReducer from "../pages/Login/loginSlice"
+import registerApi from "../pages/Register/registerApi";
 
 const persistConfig ={
     key:'root',

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios'; // Import axios for API requests
 import './PasswordReset.scss'; // Import SCSS styling
-import { BASE_URL } from './baseUrl';
+import { BASE_URL } from '../baseUrl';
 
 const PasswordReset = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();

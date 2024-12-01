@@ -1,14 +1,14 @@
-import Home from './pages/home';
-import Register from './pages/register';
-import ErrorBoundary from './pages/errorBoundary';
+import Home from './pages/LandingPage/home.jsx';
+import Register from './pages/Register/register.jsx';
+import ErrorBoundary from './pages/Error/errorBoundary.jsx';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';  
-import ActivateAccount from './pages/ActivateAccount.jsx';
-import Login from './pages/Login.jsx';
+import ActivateAccount from './pages/ActivateAccout/ActivateAccount.jsx';
+import Login from './pages/Login/Login.jsx';
 import './App.css';
-import Error from "./pages/Error.jsx"
-import  PasswordReset from "./pages/PasswordReset.jsx"
+import Error from "./pages/Error/Error.jsx"
+import  PasswordReset from "./pages/ResetPassword/PasswordReset.jsx"
 //  import UserProfile from "./pages/userProfile.jsx";
-import Dashboard from './pages/dashboard.jsx';
+import Dashboard from './pages/Dashbaord/dashboard.jsx';
 
 function App() {
   const router = createBrowserRouter([
