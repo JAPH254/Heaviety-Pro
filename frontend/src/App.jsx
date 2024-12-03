@@ -1,63 +1,34 @@
+import React from 'react';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Home from './pages/home';
-import Register from './pages/register';
+import Error from './pages/Error';
 import ErrorBoundary from './pages/errorBoundary';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';  
-import ActivateAccount from './pages/ActivateAccount.jsx';
-import Login from './pages/Login.jsx';
+import Register from './pages/register';
+import Login from './pages/Login';
+import ActivateAccount from './pages/ActivateAccount';
+import PasswordReset from './pages/PasswordReset';
+import Dashboard from './pages/dashboard';
+import ResetPasswordConfirmation from './pages/ResetPasswordConfirmation';
 import './App.css';
-import Error from "./pages/Error.jsx"
-import  PasswordReset from "./pages/PasswordReset.jsx"
-import ResetPasswordConfirmation from "./pages/ResetPasswordConfirmation.jsx"
+
+const routes = [
+  { path: '/', element: <Home /> },
+  { path: '/register', element: <Register /> },
+  { path: '/login', element: <Login /> },
+  { path: '/activateaccout', element: <ActivateAccount /> },
+  { path: '/forgot-password', element: <PasswordReset /> },
+  { path: '/dashboard', element: <Dashboard /> },
+  { path: '/errorBoundary', element: <ErrorBoundary /> },
+  { path: '/activate/:uid/:token', element: <ActivateAccount /> },
+  { path: 'password/reset/confirm/:uid/:token', element: <ResetPasswordConfirmation /> },
+];
+
+const router = createBrowserRouter(
+  routes.map((route) => ({ ...route, errorElement: <Error /> }))
+);
+
 function App() {
-  const router = createBrowserRouter([
-    {
-      path: '/',
-      element: <Home />,
-      errorElement:<Error/>
-    },
-    {
-      path: '/register',
-      element: <Register />,
-      errorElement:<Error/>
-    },
-    {
-      path: '/login',
-      element: <Login />,
-      errorElement:<Error/>
-    },
-    {
-      path: '/activateaccout',
-      element: <ActivateAccount/>,
-      errorElement:<Error/>
-    },
-    {
-      path:'/forgot-password',
-      element:<PasswordReset/>,
-      errorElement:<Error/>
-    
-
-    },
-    {
-    path:"/ErrorBoundary",
-    element: <ErrorBoundary />,
-    errorElement:<Error/>
-  }
-  ,{
-    path:"/activate/:uid/:token",
-    element: <ActivateAccount />,
-    errorElement:<Error/>
-  }
-  ,{
-    path:"/reset-password/:uid/:token",
-    element: <ResetPasswordConfirmation />,
-    errorElement:<Error/>
-  }
-  ]);
-
-  console.log('App is rendering');
-  return (
-    <RouterProvider router={router} />
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;
