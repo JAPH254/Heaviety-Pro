@@ -8,7 +8,7 @@ export const userApi = createApi({
     prepareHeaders: (headers) => {
     
       const token =
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzMzMTczMDA4LCJpYXQiOjE3MzMxNjU4MDgsImp0aSI6ImVhMzI3ZGU3OTVkODRkYzg4ODA2MjI4ODZlNmNjMDhmIiwidXNlcl9pZCI6M30.yfepm8Na3JknvoyiUWYxEZiTnDzWUiKW5BRDFI8pqfs';
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzMzMjU1NzU3LCJpYXQiOjE3MzMyNDg1NTcsImp0aSI6IjljMzRlNjcwOGFhMTQ5NDhiNDc4MzVkYTc0OTM5NjhmIiwidXNlcl9pZCI6M30._eV16vMGMZtHG3rq-7u6UEcwc64_8bnx7jIvZCKUc5o';
 
       
       if (token) {
