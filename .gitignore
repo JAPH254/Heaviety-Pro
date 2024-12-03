@@ -1,7 +1,50 @@
+# Django
+*.log
+*.pot
+*.pyc
+*.pyo
+*.db
+*.sqlite3
+__pycache__
+/venv
 .env
-env
-.env.local
-.env.production
-.env.test
-db.sqlite3
-node_modules
+*.env
+*.pid
+*.swp
+
+# React
+node_modules/
+build/
+dist/
+*.log
+
+# Python virtual environments
+/venv
+/.venv
+env/
+.env/
+
+# Django settings
+*.db
+*.log
+*.pid
+
+# VSCode
+.vscode/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# PyCharm
+.idea/
+
+# Docker
+docker-compose.override.yml
+*.dockerfile
+*.tgz
+
+# npm package lock
+package-lock.json
