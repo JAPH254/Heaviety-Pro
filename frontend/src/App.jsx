@@ -1,17 +1,15 @@
-import Home from './pages/home';
+import Home from './pages/Homepage/home.jsx';
 // import Register from './pages/register';
-import ErrorBoundary from './pages/errorBoundary';
+import ErrorBoundary from './pages/Error/errorBoundary.jsx';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';  
-import ActivateAccount from './pages/ActivateAccount.jsx';
-import Login from './pages/Login.jsx';
+import ActivateAccount from './pages/Register/ActivateAccount.jsx';
+import Login from './pages/Login/Login.jsx';
 import './App.css';
-import Error from "./pages/Error.jsx"
-import  PasswordReset from "./pages/PasswordReset.jsx"
-
-// import UserProfile from "./pages/userProfile.jsx";
-import Dashboard from './pages/dashboard.jsx';
-
-import ResetPasswordConfirmation from "./pages/ResetPasswordConfirmation.jsx"
+import Error from "./pages/Error/Error.jsx"
+import  PasswordReset from "./pages/ResetpasswordFeature/PasswordReset.jsx"
+import Dashboard from './pages/Dashboard/dashboard.jsx';
+import Register from './pages/Register/register.jsx'
+import ResetPasswordConfirmation from "./pages/ResetpasswordFeature/ResetPasswordConfirmation.jsx"
 
 function App() {
   const router = createBrowserRouter([
@@ -20,11 +18,11 @@ function App() {
       element: <Home />,
       errorElement:<Error/>
     },
-    // {
-    //   path: '/register',
-    //   element: <Register />,
-    //   errorElement:<Error/>
-    // },
+    {
+      path: '/register',
+      element: <Register />,
+      errorElement:<Error/>
+    },
     {
       path: '/login',
       element: <Login />,
@@ -39,12 +37,6 @@ function App() {
       path:'/forgot-password',
       element:<PasswordReset/>,
       errorElement:<Error/>
-    },
-    {
-      // path:'/userprofile',
-      // element:<UserProfile/>,
-      // errorElement:<Error/>
-
     },
     {
       path: '/dashboard',
