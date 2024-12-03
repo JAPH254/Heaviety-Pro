@@ -78,7 +78,7 @@ const Register = () => {
       try {
         await registerUser(data).unwrap();
         reset(); 
-        navigate('/login');
+        navigate('/activate/:uid/:token');
       } catch (error) {
         if (error.originalStatus === 500) {
           console.error('Server error: Check backend implementation.');

@@ -3,10 +3,7 @@ import {persistReducer, persistStore} from "redux-persist";
 import storage from 'redux-persist/lib/storage';
 import {setupListeners} from "@reduxjs/toolkit/query";
 
-import authReducer from "../pages/loginSlice"
-
-// import userProfileReducer from '../pages/userProfileSlice'; 
-// import registerApi from "../pages/registerApi";
+import authReducer from "../pages/Login/loginSlice"
 import registerApi from "../pages/registerApi";
 
 
@@ -16,10 +13,7 @@ const persistConfig ={
     whitelist:[],
 };
 const rootReducer = combineReducers({
-    auth:authReducer,
-
-    // auth:userProfileReducer,
-    // [registerApi.reducerPath]:registerApi.reducer  
+    auth:authReducer,  
     [registerApi.reducerPath]:registerApi.reducer
 });
 const persistedReducer  = persistReducer(persistConfig,rootReducer);
