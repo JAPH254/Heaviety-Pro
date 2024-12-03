@@ -20,7 +20,7 @@ const routes = [
   { path: '/dashboard', element: <Dashboard /> },
   { path: '/errorBoundary', element: <ErrorBoundary /> },
   { path: '/activate/:uid/:token', element: <ActivateAccount /> },
-  { path: '/reset-password/:uid/:token', element: <ResetPasswordConfirmation /> },
+  { path: 'password/reset/confirm/:uid/:token', element: <ResetPasswordConfirmation /> },
 ];
 
 const router = createBrowserRouter(
