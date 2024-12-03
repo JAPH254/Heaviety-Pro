@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { useFetchUserByIdQuery } from './userProfileApi';
 
 const UserProfile = () => {
