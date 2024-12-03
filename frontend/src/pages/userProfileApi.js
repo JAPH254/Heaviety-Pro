@@ -4,13 +4,13 @@ import BASE_URL from './baseUrl';
 export const userApi = createApi({
   reducerPath: 'userApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: BASE_URL, // Set base URL here
+    baseUrl: BASE_URL, 
     prepareHeaders: (headers) => {
-      // Replace 'YOUR_AUTH_TOKEN' with the actual token value
+    
       const token =
         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzMzMTczMDA4LCJpYXQiOjE3MzMxNjU4MDgsImp0aSI6ImVhMzI3ZGU3OTVkODRkYzg4ODA2MjI4ODZlNmNjMDhmIiwidXNlcl9pZCI6M30.yfepm8Na3JknvoyiUWYxEZiTnDzWUiKW5BRDFI8pqfs';
 
-      // Add the token to the Authorization header
+      
       if (token) {
         headers.set('Authorization', `Bearer ${token}`);
       }
@@ -20,7 +20,7 @@ export const userApi = createApi({
   }),
   endpoints: (builder) => ({
     fetchUserById: builder.query({
-      query: () => `auth/users/me`, // Endpoint defined here
+      query: () => 'auth/users/me', 
     }),
   }),
 });

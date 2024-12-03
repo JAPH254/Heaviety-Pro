@@ -132,7 +132,7 @@ const Register = () => {
         }
       }
     },
-    [registerUser, reset, navigate] // Dependencies
+    [registerUser, reset, navigate] 
   );
 
   return (
