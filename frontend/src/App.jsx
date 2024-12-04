@@ -10,6 +10,7 @@ import PasswordReset from './pages/PasswordReset';
 import Dashboard from './pages/dashboard';
 import ResetPasswordConfirmation from './pages/ResetPasswordConfirmation';
 import './App.css';
+import UserProfile from './pages/profile/UserProfile';
 
 const routes = [
   { path: '/', element: <Home /> },
@@ -18,6 +19,7 @@ const routes = [
   { path: '/activateaccout', element: <ActivateAccount /> },
   { path: '/forgot-password', element: <PasswordReset /> },
   { path: '/dashboard', element: <Dashboard /> },
+  { path: '/profile', element: <UserProfile />},
   { path: '/errorBoundary', element: <ErrorBoundary /> },
   { path: '/activate/:uid/:token', element: <ActivateAccount /> },
   { path: 'password/reset/confirm/:uid/:token', element: <ResetPasswordConfirmation /> },
