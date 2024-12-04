@@ -1,39 +1,52 @@
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
-import { Link } from 'react-router-dom';
-
-function LandingPage() {
+const LandingPage = () => {
   return (
-    <div className="flex flex-col min-h-screen bg-gradient-to-b from-blue-500 to-purple-600 p-4">
-      <div className="flex flex-col items-center justify-center flex-grow text-center">
-        <h1 className="text-5xl font-bold text-white">Welcome to Heaviety</h1>
-        <p className="text-white mt-2 text-lg">
+    <div className="min-h-screen bg-gradient-to-r from-indigo-500 to-purple-600 flex flex-col justify-center items-center">
+      <header className="text-white text-center p-8">
+        <h1 className="text-4xl md:text-6xl font-bold mb-4">
+          Welcome to Heaviety
+        </h1>
+        <p className="text-lg md:text-2xl mb-8">
           Empowering local artisans by connecting them to a global audience.
         </p>
-        <div className="flex space-x-4 mt-4">
-          <Link
-            to="/register" 
-            className="px-6 py-3 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 transition duration-300 ease-in-out"
-          >
-            Get Started
-          </Link>
-          <Link
-            to="/login" 
-            className="px-6 py-3 border-2 text-white border-blue-900 font-bold rounded-lg hover:bg-blue-600 hover:text-white transition duration-300 ease-in-out"
-          >
-            Login
-          </Link>
-        </div>
-        <div className="bg-white text-center p-6 mt-10 rounded shadow-lg w-3/4 max-w-xl">
-          <h2 className="text-3xl font-bold text-blue-800">Why Choose Heaviety?</h2>
-          <p className="mt-4 text-gray-700 text-lg">
-            Heaviety is dedicated to supporting small-scale artisans by providing them with a platform to showcase their products to a global market. We believe in the power of community and the importance of sustainable economic growth.
-            <br /><br />
-            Join us today and be part of a movement that empowers local talent and celebrates cultural diversity.
-          </p>
-        </div>
-      </div>
+        <Link
+          to="/register"
+          className="bg-white text-indigo-600 font-bold py-2 px-6 rounded-full mr-4 hover:bg-gray-200 transition duration-300"
+        >
+          Get Started
+        </Link>
+        <Link
+          to="/login"
+          className="bg-transparent border border-white text-white font-bold py-2 px-6 rounded-full hover:bg-white hover:text-indigo-600 transition duration-300"
+        >
+
+          Login
+        </Link>
+      </header>
+
+      <section className="bg-white p-8 rounded-lg shadow-lg text-center max-w-2xl mx-auto">
+        <h2 className="text-2xl font-bold text-indigo-600 mb-4">
+          Why Choose Heaviety?
+        </h2>
+        <p className="text-gray-700 mb-4">
+          Heaviety is dedicated to supporting small-scale artisans by providing
+          them with a platform to showcase their products to a global market. We
+          believe in the power of community and the importance of sustainable
+          economic growth.
+        </p>
+        <p className="text-gray-700">
+          Join us today and be part of a movement that empowers local talent and
+          celebrates cultural diversity.
+        </p>
+      </section>
+
+      <footer className="text-white text-center p-4 mt-8">
+        <p>© {new Date().getFullYear()} Heaviety. All rights reserved.</p>
+      </footer>
     </div>
   );
-}
+};
 
 export default LandingPage;
