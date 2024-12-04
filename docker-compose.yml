@@ -1,0 +1,26 @@
+services:
+  frontend:
+    build:
+      context: ./frontend  # Build React app from the frontend directory
+    ports:
+      - "5173:5173"  # Expose React port 5173
+    volumes:
+      - ./frontend:/frontend  # Mount the React app
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - backend  # Ensure backend is running before frontend starts
+
+  backend:
+    build:
+      context: ./  # Build Django app from the root directory (where manage.py is located)
+    ports:
+      - "8000:8000"  # Expose Django port 8000
+    volumes:
+      - .:/app  # Mount the entire project directory (so that manage.py is in the /app folder)
+      - ./db.sqlite3:/app/db.sqlite3  # Mount the SQLite database file
+    environment:
+      - DJANGO_ENV=development
+      - DB_PATH=/app/db.sqlite3  # Path for SQLite DB inside the container
+    working_dir: /app  # Set the working directory to /app
+    command: python manage.py runserver 0.0.0.0:8000  # Run the Django development server
