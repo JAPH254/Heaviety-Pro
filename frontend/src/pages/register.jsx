@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useRegisterUserMutation } from './registerApi';
@@ -18,7 +18,7 @@ const Heading = () => (
   <h2 className="text-3xl font-extrabold text-gray-900">Create your account</h2>
 );
 
-const RegisterForm = ({ onSubmit, register, handleSubmit, errors, isLoading, watch }) => (
+const RegisterForm = ({ onSubmit, register, handleSubmit, errors, errorMessage, isLoading, watch }) => (
   <form className="mt-8 space-y-6" onSubmit={handleSubmit(onSubmit)}>
     {[
       { id: 'first_name', label: 'First Name', type: 'text', validation: { required: 'First name is required' } },
@@ -49,6 +49,7 @@ const RegisterForm = ({ onSubmit, register, handleSubmit, errors, isLoading, wat
         {errors[id] && <p className="text-red-500 text-sm">{errors[id].message}</p>}
       </div>
     ))}
+    {errorMessage && <p className='text-red-500 text-sm'>{errorMessage}</p>}
 
     <button
       type="submit"
@@ -72,6 +73,7 @@ const Register = () => {
   const { register, handleSubmit, reset, formState: { errors }, watch } = useForm();
   const [registerUser, { isLoading }] = useRegisterUserMutation();
   const navigate = useNavigate();
+  const [errorMessage, setErrorMessage] = useState('');
 
   const onSubmitHandler = React.useCallback(
     async (data) => {
@@ -82,8 +84,10 @@ const Register = () => {
       } catch (error) {
         if (error.originalStatus === 500) {
           console.error('Server error: Check backend implementation.');
+          setErrorMessage('Internal server error. Please try again later.');
         } else {
           console.error('Registration failed', error);
+          setErrorMessage('Registration failed. Please check your input and try again.');
         }
       }
     },
@@ -98,6 +102,7 @@ const Register = () => {
         register={register}
         handleSubmit={handleSubmit}
         errors={errors}
+        errorMessage={errorMessage}
         isLoading={isLoading}
         watch={watch}
       />
