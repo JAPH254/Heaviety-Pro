@@ -36,7 +36,7 @@ const WaitingPage = () => {
     <div className="flex flex-col min-h-screen bg-gradient-to-b from-green-500 to-blue-600 p-4">
       <div className="flex items-center justify-center flex-grow">
         <div className="bg-white p-10 rounded-xl shadow-lg sm:w-full sm:max-w-md text-center">
-          <h2 className="text-3xl font-extrabold text-gray-900">Waiting for Account Activation</h2>
+          <h2 className="text-3xl font-extrabold text-gray-900">Link Sent for Account Activation</h2>
           <p className="mt-4 text-lg text-gray-700">Please check your email and click the activation link.</p>
         </div>
       </div>
