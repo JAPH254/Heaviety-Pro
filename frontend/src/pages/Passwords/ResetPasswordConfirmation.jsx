@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
@@ -12,8 +12,7 @@ const ResetPasswordConfirmation = () => {
     const [resetError, setResetError] = useState(null);
 
     const newPassword = watch('new_password');
-    const reNewPassword = watch('re_new_password');
-
+     
     const onSubmit = async (data) => {
         try {
             const response = await axios.post(`${BASE_URL}/auth/users/reset_password_confirm/
