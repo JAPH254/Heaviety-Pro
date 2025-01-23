@@ -1,16 +1,17 @@
 import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import Home from './pages/home';
+import Home from './pages/Home/home'
 import Error from './pages/Error';
 import ErrorBoundary from './pages/errorBoundary';
-import Register from './pages/register';
-import Login from './pages/Login';
-import ActivateAccount from './pages/ActivateAccount';
-import PasswordReset from './pages/PasswordReset';
-import Dashboard from './pages/dashboard';
-import ResetPasswordConfirmation from './pages/ResetPasswordConfirmation';
+import Register from './pages/Register/register';
+import Login from './pages/Login/Login';
+import ActivateAccount from './pages/Login/ActivateAccount';
+import PasswordReset from './pages/Passwords/PasswordReset';
+import Dashboard from './pages/dashboard/dashboard';
+import ResetPasswordConfirmation from './pages/Passwords/ResetPasswordConfirmation';
 import './App.css';
 import UserProfile from './pages/profile/UserProfile';
+import WaitingPage from './pages/Register/waitingpage';
 
 const routes = [
   { path: '/', element: <Home /> },
@@ -23,6 +24,7 @@ const routes = [
   { path: '/errorBoundary', element: <ErrorBoundary /> },
   { path: '/activate/:uid/:token', element: <ActivateAccount /> },
   { path: 'password/reset/confirm/:uid/:token', element: <ResetPasswordConfirmation /> },
+  {path: '/waiting', element: <WaitingPage />},
 ];
 
 const router = createBrowserRouter(

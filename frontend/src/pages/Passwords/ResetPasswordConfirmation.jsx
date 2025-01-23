@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
-import BASE_URL from './baseUrl';
+import BASE_URL from '../baseUrl';
 
 const ResetPasswordConfirmation = () => {
     const { register, handleSubmit, formState: { errors }, watch } = useForm();

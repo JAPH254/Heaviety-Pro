@@ -10,11 +10,6 @@ const ActivateAccount = () => {
   const [showAlert, setShowAlert] = useState(false); 
 
   const handleActivation = useCallback(async () => {
-    if (!uid || !token) {
-      setAlertMessage("Invalid activation link. Please try again.");
-      setShowAlert(true);
-      return;
-    }
 
     try {
       const response = await axios.post("http://127.0.0.1:8000/auth/users/activation/", {
@@ -22,19 +17,19 @@ const ActivateAccount = () => {
         token,
       });
 
-      if (response.status === 200) {
-        setAlertMessage("Account activated successfully.");
-        setShowAlert(true);
+      setAlertMessage(response.data?.message|| "Account activated successfully");
+      setShowAlert(true);
+      if (response.status === 204) {
+        console.log("Account activated! Redirecting to login page...");
         setTimeout(() => navigate("/login"), 2000);
-      } else {
-        setAlertMessage("Failed to activate account. Please try again.");
-        setShowAlert(true);
-      }
+      } 
+      else if(response.status ===403)
+        console.log("Error activating account");
+      
     } catch (error) {
       console.error("Activation error:", error);
-      setAlertMessage(
-        "An error occurred while activating the account. Please try again later."
-      );
+      const errorMessage = error.response?.data?.message || "Error activating account";
+      setAlertMessage(errorMessage);
       setShowAlert(true);
     }
   }, [uid, token, navigate]);
@@ -43,19 +38,24 @@ const ActivateAccount = () => {
     setShowAlert(false);
   }, []);
 
-  const CustomAlert = ({ message, onClose }) => (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-      <div className="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full">
-        <p className="text-gray-800 text-center mb-4">{message}</p>
-        <button
-          onClick={onClose}
-          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 transition duration-300 w-full"
-        >
-          OK
-        </button>
+  const CustomAlert = ({ message, type = "info", onClose }) => {
+    const bgColor = type === "success" ? "bg-green-500" : type === "error" ? "bg-red-500" : "bg-blue-500";
+  
+    return (
+      <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm z-50">
+        <div className="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full">
+          <p className="text-gray-800 text-center font-medium mb-4">{message}</p>
+          <button
+            onClick={onClose}
+            className={`${bgColor} text-white px-4 py-2 rounded-md hover:opacity-90 transition-all duration-300 w-full font-semibold`}
+          >
+            OK
+          </button>
+        </div>
       </div>
-    </div>
-  );
+    );
+  };
+  
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
