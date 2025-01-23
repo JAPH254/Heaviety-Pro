@@ -86,7 +86,7 @@ const Register = () => {
           console.error('Server error: Check backend implementation.');
           setErrorMessage('Check your credentials and try again');
         } else if (error.originalStatus === 400) { 
-          if (error.data && error.data.email && error.data.email.includes('user with this email address already exists.')) {
+          if (error?.data?.email.includes('user with this email address already exists.')) {
             setErrorMessage('This email is already used. Please use a different email.');
           } else {
             setErrorMessage('Registration failed. Please check your input and try again.'); 

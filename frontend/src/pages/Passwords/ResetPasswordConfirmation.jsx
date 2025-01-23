@@ -15,19 +15,22 @@ const ResetPasswordConfirmation = () => {
      
     const onSubmit = async (data) => {
         try {
-            const response = await axios.post(`${BASE_URL}/auth/users/reset_password_confirm/
-
-`, {
+            const response = await axios.post(`${BASE_URL}/auth/users/reset_password_confirm/`, {
                 uid,
                 token,
                 new_password: data.new_password,
                 re_new_password: data.re_new_password,
             });
+            if (response.status === 204) {
             setResetSuccess(true);
             setResetError(null);
+            } else {
+            setResetError('Failed to reset password. Please try again.');
+            }
         } catch (error) {
             setResetError('Failed to reset password. Please try again.');
         }
+
     };
 
     return (
