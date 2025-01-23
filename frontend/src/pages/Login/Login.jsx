@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { login } from "../Login/loginSlice"; // Adjust the path if necessary
+import { login } from "./loginSlice"; // Adjust the path if necessary
 import "./Login.scss";
 
 // Extracted FormGroup Component
