@@ -3,7 +3,7 @@ import { googleLogin, login } from "./loginSlice"; // Import both login methods
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import "./Login.scss";
 
 const FormGroup = ({ type, placeholder, registerProps, error }) => (
@@ -28,7 +28,7 @@ const Login = () => {
 
   const DASHBOARD_ROUTE = "/dashboard";
 
-  const onSubmit = async (data) => {
+  const onSubmit = useCallback(async (data) => {
     try {
       const response = await dispatch(login({ email: data.email, password: data.password })).unwrap();
       localStorage.setItem("refresh", response.refresh);
@@ -37,7 +37,7 @@ const Login = () => {
     } catch (err) {
       console.error("Login failed:", err);
     }
-  };
+  },[dispatch, navigate]);
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -47,15 +47,15 @@ const Login = () => {
 
   // Google login function
   const googleLoginHandler = useGoogleLogin({
-    onSuccess: async (tokenResponse) => {
+    onSuccess:useCallback(async (tokenResponse) => {
       try {
         await dispatch(googleLogin(tokenResponse.access_token)).unwrap();
         navigate(DASHBOARD_ROUTE);
       } catch (err) {
         console.error("Google Login failed:", err);
       }
-    },
-    onError: () => console.error("Google login failed"),
+    }, [dispatch, navigate]),
+    onError: useCallback(() => console.error("Google login failed"), []),
   });
 
   return (
@@ -75,7 +75,7 @@ const Login = () => {
           error={errors.password?.message}
         />
         <button type="submit" disabled={loading}>{loading ? "Logging in..." : "Login"}</button>
-        <button type="button" className="google-login-btn" onClick={() => googleLoginHandler()}>
+        <button type="button" className="google-login-btn" onClick={googleLoginHandler}>
           Login with Google
         </button>
         {error && <span className="error-message">{error}</span>}
