@@ -1,4 +1,4 @@
-.login-container{
+.login-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -6,8 +6,8 @@
   height: 100vh;
   font-family: 'Poppins', sans-serif;
   margin: 0;
-
 }
+
 .login-form {
   background-color: #ffffff;
   padding: 60px;
@@ -19,36 +19,24 @@
   position: relative;
   box-sizing: border-box;
 
-  .close-button {
-    position: absolute;
-    top: 15px;
-    right: 20px;
-    font-size: 18px;
-    cursor: pointer;
-    border: none;
-    background: none;
-  }
-
   h1 {
     font-size: 26px;
     margin-bottom: 30px;
     color: #333;
     font-weight: 600;
-    width: 90%; 
-    margin: 0 auto 30px; 
-    text-align: left; 
+    text-align: left;
+    width: 90%;
   }
 
   input, button {
     display: block;
     margin: 15px auto;
-    width: 90%; 
+    width: 90%;
     padding: 15px;
     border-radius: 8px;
     font-size: 16px;
     transition: all 0.3s ease;
     box-sizing: border-box;
-    text-align: left;
   }
 
   input {
@@ -69,10 +57,38 @@
     font-weight: 600;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    text-align: center;
 
     &:hover {
       background-color: #357ae8;
+    }
+  }
+
+  .google-login-btn {
+    background-color: white;
+    color: #333;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 90%;
+
+    &:hover {
+      background-color: #f1f1f1;
+    }
+
+    &::before {
+      content: "";
+      background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png') no-repeat center;
+      background-size: contain;
+      width: 20px;
+      height: 20px;
+      display: inline-block;
     }
   }
 
@@ -81,23 +97,24 @@
     font-size: 14px;
     margin-bottom: 10px;
     text-align: left;
-    width: 90%; /* Match width */
+    width: 90%;
   }
-  .auth-links{
+
+  .auth-links {
     margin-top: 10px;
     font-size: 14px;
     text-align: center;
-    a{
+
+    a {
       color: #4285f4;
       text-decoration: none;
-      font-weight:600;
-      transition: color 0.3 ease;
+      font-weight: 600;
+      transition: color 0.3s ease;
 
-      &:hover{
+      &:hover {
         color: #357ae8;
         text-decoration: underline;
       }
-
     }
   }
 

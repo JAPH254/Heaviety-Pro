@@ -1,22 +1,30 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-// Async thunk for login
+// Email/Password Login
 export const login = createAsyncThunk('auth/login', async (credentials, { rejectWithValue }) => {
     try {
         const response = await axios.post('http://127.0.0.1:8000/auth/jwt/create/', credentials, {
             headers: { 'Content-Type': 'application/json' },
         });
-        if( response.data.access && response.data.refresh){
-            return response.data;
-        }else{
-            throw new Error("Invalid response format");   
-        } 
+        return response.data;
     } catch (error) {
-        return rejectWithValue(error.response && error.response?.data || 'Login failed');
+        return rejectWithValue(error.response?.data || 'Login failed');
     }
-    
 });
+
+// Google Login
+export const googleLogin = createAsyncThunk('auth/googleLogin', async (googleToken, { rejectWithValue }) => {
+    try {
+        const response = await axios.post('http://127.0.0.1:8000/auth/social/login/google/', { access_token: googleToken }, {
+            headers: { 'Content-Type': 'application/json' },
+        });
+        return response.data;
+    } catch (error) {
+        return rejectWithValue(error.response?.data || 'Google Login failed');
+    }
+});
+
 // Initial state
 const initialState = {
     loading: false,
@@ -52,21 +60,33 @@ const authSlice = createSlice({
                 state.isAuthenticated = true;
                 state.access = action.payload.access;
                 state.refresh = action.payload.refresh;
-
-                // Store tokens in localStorage
                 localStorage.setItem('access', action.payload.access);
                 localStorage.setItem('refresh', action.payload.refresh);
             })
             .addCase(login.rejected, (state, action) => {
                 state.loading = false;
-                state.error = action.payload || 'Login failed';
+                state.error = action.payload;
+                state.isAuthenticated = false;
+            })
+            .addCase(googleLogin.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(googleLogin.fulfilled, (state, action) => {
+                state.loading = false;
+                state.isAuthenticated = true;
+                state.access = action.payload.access;
+                state.refresh = action.payload.refresh;
+                localStorage.setItem('access', action.payload.access);
+                localStorage.setItem('refresh', action.payload.refresh);
+            })
+            .addCase(googleLogin.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
                 state.isAuthenticated = false;
             });
     },
 });
 
-// Export logout action
 export const { logout } = authSlice.actions;
-
-// Export reducer
 export default authSlice.reducer;
