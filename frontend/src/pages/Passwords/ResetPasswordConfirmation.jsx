@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
-import BASE_URL from './baseUrl';
+import BASE_URL from '../baseUrl';
 
 const ResetPasswordConfirmation = () => {
     const { register, handleSubmit, formState: { errors }, watch } = useForm();
@@ -12,23 +12,25 @@ const ResetPasswordConfirmation = () => {
     const [resetError, setResetError] = useState(null);
 
     const newPassword = watch('new_password');
-    const reNewPassword = watch('re_new_password');
-
+     
     const onSubmit = async (data) => {
         try {
-            const response = await axios.post(`${BASE_URL}/auth/users/reset_password_confirm/
-
-`, {
+            const response = await axios.post(`${BASE_URL}/auth/users/reset_password_confirm/`, {
                 uid,
                 token,
                 new_password: data.new_password,
                 re_new_password: data.re_new_password,
             });
+            if (response.status === 204) {
             setResetSuccess(true);
             setResetError(null);
+            } else {
+            setResetError('Failed to reset password. Please try again.');
+            }
         } catch (error) {
             setResetError('Failed to reset password. Please try again.');
         }
+
     };
 
     return (

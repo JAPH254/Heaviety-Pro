@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
-import "./Error.scss";
+import "./styles/Error.scss";
 
 function Error({ statusText, message }) {
   return (

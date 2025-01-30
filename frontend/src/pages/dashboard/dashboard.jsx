@@ -1,5 +1,5 @@
 import { useState, useCallback, createContext } from "react";
-import Sidebar from "./Sidebar.jsx";
+import Sidebar from "./Sidebar";
 
 const SidebarContext = createContext();
 
